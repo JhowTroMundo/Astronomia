@@ -135,11 +135,11 @@
                 if (!canvas) return;
                 const ctx = canvas.getContext('2d');
                 let stars = []; const numStars = 200;
-                const resizeCanvas = () => { if(canvas){canvas.width = window.innerWidth; canvas.height = canvas.parentElement.offsetHeight;} };
-                const createStars = () => { stars = []; if(canvas){for (let i = 0; i < numStars; i++) { stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, alpha: Math.random(), dAlpha: Math.random() * 0.01 - 0.005 }); }} };
+                const resize = () => { if(canvas){canvas.width = window.innerWidth; canvas.height = canvas.parentElement.offsetHeight;} };
+                const create = () => { stars = []; if(canvas){for (let i = 0; i < numStars; i++) { stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, alpha: Math.random(), dAlpha: Math.random() * 0.01 - 0.005 }); }} };
                 const animate = () => { if(canvas){ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'; stars.forEach(star => { star.alpha += star.dAlpha; if (star.alpha <= 0 || star.alpha >= 1) star.dAlpha *= -1; ctx.globalAlpha = star.alpha; ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); ctx.fill(); });} requestAnimationFrame(animate); };
-                window.addEventListener('resize', resizeCanvas);
-                resizeCanvas(); createStars(); animate();
+                window.addEventListener('resize', resize);
+                resize(); create(); animate();
             };
             
             const setupSimulator = () => {
@@ -160,12 +160,13 @@
                     planet = { radius: 5, angle: 0, distance: 150, isHit: false, hitTimer: 0 };
                     
                     if (mode === 'convection') {
+                        const radius = Math.min(canvas.width, canvas.height) * 0.4;
                         for (let i = 0; i < 80; i++) {
                             const angle = Math.random() * 2 * Math.PI;
-                            const radius = Math.random() * 90;
+                            const r = Math.random() * radius * 0.9;
                             particles.push({
-                                x: Math.cos(angle) * radius,
-                                y: Math.sin(angle) * radius,
+                                x: Math.cos(angle) * r,
+                                y: Math.sin(angle) * r,
                                 vx: (Math.random() - 0.5) * 0.5,
                                 vy: (Math.random() - 0.5) * 0.5,
                                 color: Math.random() > 0.5 ? '#fef3c7' : '#fca5a5'
@@ -173,92 +174,85 @@
                         }
                     }
                 };
-                
-                const drawLongevity = () => {
-                    const centerX = canvas.width / 2;
-                    const centerY = canvas.height / 2;
-                    const sunX = centerX - canvas.width / 4;
-                    const redDwarfX = centerX + canvas.width / 4;
-                    
-                    const time = state.frame / 30;
-                    ctx.fillStyle = 'white'; ctx.font = '16px Inter'; ctx.textAlign = 'center';
-                    ctx.fillText(`Tempo: ${time.toFixed(1)} Bilhões de Anos`, centerX, 30);
-                    ctx.fillText('Sol', sunX, centerY - 50);
-                    ctx.fillText('Anã Vermelha', redDwarfX, centerY - 50);
-
-                    if (time > 5 && sun.state === 'main_sequence') { sun.state = 'red_giant'; }
-                    if (time > 6 && sun.state === 'red_giant') { sun.state = 'white_dwarf'; }
-
-                    if (sun.state === 'main_sequence') { ctx.fillStyle = '#fde047'; ctx.beginPath(); ctx.arc(sunX, centerY, sun.radius, 0, 2 * Math.PI); ctx.fill(); }
-                    else if (sun.state === 'red_giant') { sun.radius += 0.2; if(sun.radius > 40) sun.radius = 40; ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(sunX, centerY, sun.radius, 0, 2 * Math.PI); ctx.fill(); }
-                    else if (sun.state === 'white_dwarf') { sun.radius = 5; sun.alpha -= 0.01; if (sun.alpha < 0) sun.alpha = 0; ctx.fillStyle = `rgba(147, 197, 253, ${sun.alpha})`; ctx.beginPath(); ctx.arc(sunX, centerY, sun.radius, 0, 2 * Math.PI); ctx.fill();}
-                    
-                    ctx.fillStyle = `rgba(239, 68, 68, ${redDwarf.alpha})`; ctx.beginPath(); ctx.arc(redDwarfX, centerY, redDwarf.radius, 0, 2 * Math.PI); ctx.fill();
-                    if(time > 500) redDwarf.alpha -= 0.0001;
-                };
-
-                const drawFlares = () => {
-                    const centerX = canvas.width / 2; const centerY = canvas.height / 2;
-                    
-                    planet.angle += 0.01;
-                    const pX = centerX + planet.distance * Math.cos(planet.angle);
-                    const pY = centerY + planet.distance * Math.sin(planet.angle);
-                    if(planet.isHit) { planet.hitTimer--; if(planet.hitTimer <=0) planet.isHit = false; }
-                    ctx.fillStyle = planet.isHit ? '#fca5a5' : '#3b82f6';
-                    ctx.beginPath(); ctx.arc(pX, pY, planet.radius, 0, 2 * Math.PI); ctx.fill();
-                    
-                    ctx.fillStyle = '#b91c1c'; ctx.beginPath(); ctx.arc(centerX, centerY, 20, 0, 2 * Math.PI); ctx.fill();
-                    
-                    if (state.frame > 50 && Math.random() < 0.02 && particles.length === 0) {
-                        const flareAngle = Math.random() * 2 * Math.PI;
-                        for (let i = 0; i < 200; i++) {
-                            const speed = Math.random() * 5 + 3;
-                            const angle = flareAngle + (Math.random() - 0.5) * 0.5;
-                            particles.push({ x: centerX, y: centerY, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 120 });
-                        }
-                        const planetAngle = Math.atan2(pY - centerY, pX - centerX);
-                        if (Math.abs(flareAngle - planetAngle) < 0.4 || Math.abs(flareAngle - planetAngle + 2*Math.PI) < 0.4 || Math.abs(flareAngle - planetAngle - 2*Math.PI) < 0.4) { planet.isHit = true; planet.hitTimer = 60; }
-                    }
-
-                    particles.forEach((p, i) => {
-                        p.x += p.vx; p.y += p.vy; p.life--;
-                        if (p.life <= 0) particles.splice(i, 1);
-                        ctx.fillStyle = `rgba(251, 191, 36, ${p.life/120})`;
-                        ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, 2 * Math.PI); ctx.fill();
-                    });
-                };
-                
-                const drawConvection = () => {
-                    const centerX = canvas.width / 2; const centerY = canvas.height / 2;
-                    const radius = Math.min(centerX, centerY) * 0.8;
-
-                    ctx.globalCompositeOperation = 'lighter';
-                    particles.forEach(p => {
-                        p.x += p.vx; p.y += p.vy;
-                        const dist = Math.sqrt(p.x * p.x + p.y * p.y);
-                        if (dist > radius) { const angle = Math.atan2(p.y, p.x); p.vx = -Math.cos(angle) * 0.5; p.vy = -Math.sin(angle) * 0.5; }
-                        
-                        const alpha = 1 - (dist / radius);
-                        ctx.fillStyle = p.color;
-                        ctx.beginPath();
-                        ctx.arc(centerX + p.x, centerY + p.y, 5, 0, 2 * Math.PI);
-                        ctx.globalAlpha = alpha * 0.5;
-                        ctx.fill();
-                    });
-                    ctx.globalCompositeOperation = 'source-over';
-                    ctx.globalAlpha = 1;
-
-                    ctx.fillStyle = 'rgba(239, 68, 68, 0.2)'; ctx.beginPath(); ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI); ctx.fill();
-                    ctx.strokeStyle = 'rgba(239, 68, 68, 0.5)'; ctx.lineWidth = 2; ctx.stroke();
-                };
 
                 const draw = () => {
                     if(!canvas) return;
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
                     ctx.clearRect(0,0,canvas.width, canvas.height);
-                    if (state.mode === 'longevity') { drawLongevity(); }
-                    else if (state.mode === 'flares') { drawFlares(); }
-                    else if (state.mode === 'convection') { drawConvection(); }
-                    else { ctx.fillStyle = 'rgba(226, 232, 240, 0.8)'; ctx.font = '20px Inter'; ctx.textAlign = 'center'; ctx.fillText('Selecione uma simulação acima.', canvas.width / 2, canvas.height / 2); }
+
+                    if (state.mode === 'longevity') {
+                        const sunX = centerX - canvas.width / 4;
+                        const redDwarfX = centerX + canvas.width / 4;
+                        const time = state.frame / 30;
+                        ctx.fillStyle = 'white'; ctx.font = '16px Inter'; ctx.textAlign = 'center';
+                        ctx.fillText(`Tempo: ${time.toFixed(1)} Bilhões de Anos`, centerX, 30);
+                        ctx.fillText('Sol', sunX, centerY - 50);
+                        ctx.fillText('Anã Vermelha', redDwarfX, centerY - 50);
+
+                        if (time > 5 && sun.state === 'main_sequence') { sun.state = 'red_giant'; }
+                        if (time > 6 && sun.state === 'red_giant') { sun.state = 'white_dwarf'; }
+
+                        if (sun.state === 'main_sequence') { ctx.fillStyle = '#fde047'; ctx.beginPath(); ctx.arc(sunX, centerY, sun.radius, 0, 2 * Math.PI); ctx.fill(); }
+                        else if (sun.state === 'red_giant') { sun.radius += 0.2; if(sun.radius > 40) sun.radius = 40; ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(sunX, centerY, sun.radius, 0, 2 * Math.PI); ctx.fill(); }
+                        else if (sun.state === 'white_dwarf') { sun.radius = 5; sun.alpha -= 0.01; if (sun.alpha < 0) sun.alpha = 0; ctx.fillStyle = `rgba(147, 197, 253, ${sun.alpha})`; ctx.beginPath(); ctx.arc(sunX, centerY, sun.radius, 0, 2 * Math.PI); ctx.fill();}
+                        
+                        ctx.fillStyle = `rgba(239, 68, 68, ${redDwarf.alpha})`; ctx.beginPath(); ctx.arc(redDwarfX, centerY, redDwarf.radius, 0, 2 * Math.PI); ctx.fill();
+                        if(time > 500) redDwarf.alpha -= 0.0001;
+                    }
+                    else if (state.mode === 'flares') {
+                        planet.angle += 0.01;
+                        const pX = centerX + planet.distance * Math.cos(planet.angle);
+                        const pY = centerY + planet.distance * Math.sin(planet.angle);
+                        if(planet.isHit) { planet.hitTimer--; if(planet.hitTimer <=0) planet.isHit = false; }
+                        ctx.fillStyle = planet.isHit ? '#fca5a5' : '#3b82f6';
+                        ctx.beginPath(); ctx.arc(pX, pY, planet.radius, 0, 2 * Math.PI); ctx.fill();
+                        
+                        ctx.fillStyle = '#b91c1c'; ctx.beginPath(); ctx.arc(centerX, centerY, 20, 0, 2 * Math.PI); ctx.fill();
+                        
+                        if (state.frame > 50 && Math.random() < 0.02 && particles.length === 0) {
+                            const flareAngle = Math.random() * 2 * Math.PI;
+                            for (let i = 0; i < 200; i++) {
+                                const speed = Math.random() * 5 + 3;
+                                const angle = flareAngle + (Math.random() - 0.5) * 0.5;
+                                particles.push({ x: centerX, y: centerY, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 120 });
+                            }
+                            const planetAngle = Math.atan2(pY - centerY, pX - centerX);
+                            if (Math.abs(flareAngle - planetAngle) < 0.4 || Math.abs(flareAngle - planetAngle + 2*Math.PI) < 0.4 || Math.abs(flareAngle - planetAngle - 2*Math.PI) < 0.4) { planet.isHit = true; planet.hitTimer = 60; }
+                        }
+
+                        particles.forEach((p, i) => {
+                            p.x += p.vx; p.y += p.vy; p.life--;
+                            if (p.life <= 0) particles.splice(i, 1);
+                            ctx.fillStyle = `rgba(251, 191, 36, ${p.life/120})`;
+                            ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, 2 * Math.PI); ctx.fill();
+                        });
+                    }
+                    else if (state.mode === 'convection') {
+                        const radius = Math.min(centerX, centerY) * 0.8;
+                        ctx.globalCompositeOperation = 'lighter';
+                        particles.forEach(p => {
+                            p.x += p.vx; p.y += p.vy;
+                            const dist = Math.sqrt(p.x * p.x + p.y * p.y);
+                            if (dist > radius) { const angle = Math.atan2(p.y, p.x); p.vx = -Math.cos(angle) * 0.5; p.vy = -Math.sin(angle) * 0.5; }
+                            
+                            const alpha = 1 - (dist / radius);
+                            ctx.fillStyle = p.color;
+                            ctx.beginPath();
+                            ctx.arc(centerX + p.x, centerY + p.y, 5, 0, 2 * Math.PI);
+                            ctx.globalAlpha = alpha * 0.5;
+                            ctx.fill();
+                        });
+                        ctx.globalCompositeOperation = 'source-over';
+                        ctx.globalAlpha = 1;
+
+                        ctx.fillStyle = 'rgba(239, 68, 68, 0.2)'; ctx.beginPath(); ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI); ctx.fill();
+                        ctx.strokeStyle = 'rgba(239, 68, 68, 0.5)'; ctx.lineWidth = 2; ctx.stroke();
+                    }
+                    else {
+                        ctx.fillStyle = 'rgba(226, 232, 240, 0.8)'; ctx.font = '20px Inter'; ctx.textAlign = 'center';
+                        ctx.fillText('Selecione uma simulação acima.', centerX, centerY);
+                    }
                     state.frame++;
                     requestAnimationFrame(draw);
                 };
@@ -268,9 +262,15 @@
                 document.getElementById('sim-convection').onclick = () => reset('convection');
                 document.getElementById('sim-reset').onclick = () => { state.mode = 'idle'; particles = []; };
 
+                // A Correção: Adicionar um listener para o evento 'load' da janela
+                // e iniciar a simulação a partir dele.
+                window.addEventListener('load', () => {
+                    resizeCanvas();
+                    reset('idle');
+                    draw();
+                });
+
                 window.addEventListener('resize', resizeCanvas);
-                reset('idle');
-                draw();
             };
 
             setupStarfield();
