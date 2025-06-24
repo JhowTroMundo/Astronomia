@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anãs Vermelhas: As Estrelas Eternas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .glass-effect { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.3); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl md:text-2xl font-bold text-red-400">Anãs Vermelhas</h1>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#longevity" class="text-slate-300 hover:text-red-400 transition-colors">Longevidade</a>
+                    <a href="#proxima-centauri" class="text-slate-300 hover:text-red-400 transition-colors">Proxima Centauri</a>
+                    <a href="#flares" class="text-slate-300 hover:text-red-400 transition-colors">Flares</a>
+                    <a href="#simulator" class="text-slate-300 hover:text-red-400 transition-colors">Simulador</a>
+                    <a href="index.html" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600 transition-colors font-semibold">Voltar</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="relative py-20 sm:py-32 text-center overflow-hidden">
+            <canvas id="starfield-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">As Soberanas do Futuro Cósmico</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">As anãs vermelhas são as estrelas mais comuns e longevas do universo. Pequenas, frias e econômicas, elas queimarão por trilhões de anos, muito depois que todas as outras estrelas, como o Sol, tiverem se apagado.</p>
+            </div>
+        </section>
+
+        <section id="longevity" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">O Segredo da Vida Eterna</h2>
+                    <p class="mt-4 text-lg text-slate-400">Sua longevidade se deve a uma característica fundamental: a convecção total.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-slate-300 space-y-4 text-base">
+                        <p><strong class="font-semibold text-red-400">Combustível Bem Aproveitado:</strong> Diferente do Sol, onde o hélio se acumula no núcleo, uma anã vermelha é totalmente convectiva. Seu interior "ferve" constantemente, trazendo hidrogênio novo das camadas externas para o núcleo e movendo o hélio para fora. Isso permite que ela use uma porção muito maior de seu combustível total.</p>
+                        <p><strong class="font-semibold text-red-400">Queima Lenta e Constante:</strong> Por serem menos massivas, a pressão em seus núcleos é menor. Elas fundem hidrogênio a uma taxa muito mais lenta e eficiente do que estrelas maiores, conservando sua energia por eras.</p>
+                        <p><strong class="font-semibold text-red-400">As Últimas Luzes do Universo:</strong> Como resultado, uma anã vermelha pode viver por até 10 trilhões de anos. Elas serão as últimas estrelas a brilhar no universo, muito antes de finalmente se tornarem anãs negras frias.</p>
+                    </div>
+                    <div class="flex justify-center items-center p-8">
+                        <div class="relative w-64 h-64 flex items-center justify-center">
+                            <svg class="absolute w-full h-full animate-spin" viewBox="0 0 100 100" style="animation-duration: 20s;">
+                                <path d="M 50,5 A 45,45 0 0 1 95,50" fill="none" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M 50,95 A 45,45 0 0 1 5,50" fill="none" stroke="#f87171" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                            <div class="w-3/4 h-3/4 rounded-full bg-red-800/50 flex items-center justify-center text-center">
+                                <span class="text-white text-lg font-semibold">Convecção<br>Total</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="proxima-centauri" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold">
+                        <a href="https://en.wikipedia.org/wiki/Proxima_Centauri" target="_blank" rel="noopener noreferrer" class="text-white hover:text-red-400 hover:underline transition-colors">
+                            Estudo de Caso: Proxima Centauri
+                        </a>
+                    </h2>
+                    <p class="mt-4 text-lg text-slate-400">A estrela mais próxima do nosso Sol e uma anã vermelha exemplar.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-400 font-bold text-xl">Distância</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">4.2 anos-luz</p>
+                        <p class="text-slate-400 mt-2">Nossa vizinha estelar imediata</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-400 font-bold text-xl">Massa</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">0.12 M☉</p>
+                        <p class="text-slate-400 mt-2">Apenas 12% da massa do Sol</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-400 font-bold text-xl">Luminosidade</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">0.17% do Sol</p>
+                        <p class="text-slate-400 mt-2">Brilha muito fracamente</p>
+                    </div>
+                     <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-400 font-bold text-xl">Planetas</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">3 Conhecidos</p>
+                        <p class="text-slate-400 mt-2">Incluindo Proxima Centauri b</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="flares" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-white">Violência Inesperada</h2>
+                <p class="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">Apesar de pequenas, muitas anãs vermelhas são extremamente ativas. Elas podem emitir <strong class="text-red-400">flares (erupções)</strong> de energia que, proporcionalmente, são muito mais poderosas que as do Sol. Uma única erupção de Proxima Centauri pode torná-la centenas de vezes mais brilhante por alguns minutos, liberando uma quantidade letal de radiação que provavelmente esteriliza a superfície de seus planetas próximos.</p>
+            </div>
+        </section>
+        
+        <section id="simulator" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Simulador Interativo da Anã Vermelha</h2>
+                    <p class="mt-4 text-lg text-slate-400">Explore as características únicas das estrelas mais comuns do universo.</p>
+                </div>
+                <div class="w-full max-w-4xl mx-auto aspect-video glass-effect rounded-lg overflow-hidden">
+                    <canvas id="simulator-canvas"></canvas>
+                </div>
+                <div class="flex justify-center flex-wrap gap-4 mt-8">
+                    <button id="sim-longevity" class="bg-red-500 text-white px-5 py-2.5 rounded-md hover:bg-red-600 transition-colors font-semibold">Simular Longevidade</button>
+                    <button id="sim-flares" class="bg-red-500 text-white px-5 py-2.5 rounded-md hover:bg-red-600 transition-colors font-semibold">Simular Flares</button>
+                    <button id="sim-convection" class="bg-red-500 text-white px-5 py-2.5 rounded-md hover:bg-red-600 transition-colors font-semibold">Simular Convecção</button>
+                    <button id="sim-reset" class="bg-slate-600 text-white px-5 py-2.5 rounded-md hover:bg-slate-700 transition-colors font-semibold">Resetar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const setupStarfield = () => {
+                const canvas = document.getElementById('starfield-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let stars = []; const numStars = 200;
+                const resizeCanvas = () => { if(canvas){canvas.width = window.innerWidth; canvas.height = canvas.parentElement.offsetHeight;} };
+                const createStars = () => { stars = []; if(canvas){for (let i = 0; i < numStars; i++) { stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, alpha: Math.random(), dAlpha: Math.random() * 0.01 - 0.005 }); }} };
+                const animate = () => { if(canvas){ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'; stars.forEach(star => { star.alpha += star.dAlpha; if (star.alpha <= 0 || star.alpha >= 1) star.dAlpha *= -1; ctx.globalAlpha = star.alpha; ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); ctx.fill(); });} requestAnimationFrame(animate); };
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas(); createStars(); animate();
+            };
+            
+            const setupSimulator = () => {
+                const canvas = document.getElementById('simulator-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let state = { mode: 'idle', frame: 0 };
+                let sun, redDwarf, particles, planet;
+
+                const resizeCanvas = () => { if(canvas) { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; }};
+                
+                const reset = (mode = 'idle') => {
+                    state.mode = mode;
+                    state.frame = 0;
+                    particles = [];
+                    sun = { radius: 15, state: 'main_sequence', alpha: 1 };
+                    redDwarf = { radius: 8, alpha: 1 };
+                    planet = { radius: 5, angle: 0, distance: 150, isHit: false, hitTimer: 0 };
+                    
+                    if (mode === 'convection') {
+                        for (let i = 0; i < 80; i++) {
+                            const angle = Math.random() * 2 * Math.PI;
+                            const radius = Math.random() * 90;
+                            particles.push({
+                                x: Math.cos(angle) * radius,
+                                y: Math.sin(angle) * radius,
+                                vx: (Math.random() - 0.5) * 0.5,
+                                vy: (Math.random() - 0.5) * 0.5,
+                                color: Math.random() > 0.5 ? '#fef3c7' : '#fca5a5'
+                            });
+                        }
+                    }
+                };
+                
+                const drawLongevity = () => {
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    const sunX = centerX - canvas.width / 4;
+                    const redDwarfX = centerX + canvas.width / 4;
+                    
+                    const time = state.frame / 30;
+                    ctx.fillStyle = 'white'; ctx.font = '16px Inter'; ctx.textAlign = 'center';
+                    ctx.fillText(`Tempo: ${time.toFixed(1)} Bilhões de Anos`, centerX, 30);
+                    ctx.fillText('Sol', sunX, centerY - 50);
+                    ctx.fillText('Anã Vermelha', redDwarfX, centerY - 50);
+
+                    if (time > 5 && sun.state === 'main_sequence') { sun.state = 'red_giant'; }
+                    if (time > 6 && sun.state === 'red_giant') { sun.state = 'white_dwarf'; }
+
+                    if (sun.state === 'main_sequence') { ctx.fillStyle = '#fde047'; ctx.beginPath(); ctx.arc(sunX, centerY, sun.radius, 0, 2 * Math.PI); ctx.fill(); }
+                    else if (sun.state === 'red_giant') { sun.radius += 0.2; if(sun.radius > 40) sun.radius = 40; ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(sunX, centerY, sun.radius, 0, 2 * Math.PI); ctx.fill(); }
+                    else if (sun.state === 'white_dwarf') { sun.radius = 5; sun.alpha -= 0.01; if (sun.alpha < 0) sun.alpha = 0; ctx.fillStyle = `rgba(147, 197, 253, ${sun.alpha})`; ctx.beginPath(); ctx.arc(sunX, centerY, sun.radius, 0, 2 * Math.PI); ctx.fill();}
+                    
+                    ctx.fillStyle = `rgba(239, 68, 68, ${redDwarf.alpha})`; ctx.beginPath(); ctx.arc(redDwarfX, centerY, redDwarf.radius, 0, 2 * Math.PI); ctx.fill();
+                    if(time > 500) redDwarf.alpha -= 0.0001;
+                };
+
+                const drawFlares = () => {
+                    const centerX = canvas.width / 2; const centerY = canvas.height / 2;
+                    
+                    planet.angle += 0.01;
+                    const pX = centerX + planet.distance * Math.cos(planet.angle);
+                    const pY = centerY + planet.distance * Math.sin(planet.angle);
+                    if(planet.isHit) { planet.hitTimer--; if(planet.hitTimer <=0) planet.isHit = false; }
+                    ctx.fillStyle = planet.isHit ? '#fca5a5' : '#3b82f6';
+                    ctx.beginPath(); ctx.arc(pX, pY, planet.radius, 0, 2 * Math.PI); ctx.fill();
+                    
+                    ctx.fillStyle = '#b91c1c'; ctx.beginPath(); ctx.arc(centerX, centerY, 20, 0, 2 * Math.PI); ctx.fill();
+                    
+                    if (state.frame > 50 && Math.random() < 0.02 && particles.length === 0) {
+                        const flareAngle = Math.random() * 2 * Math.PI;
+                        for (let i = 0; i < 200; i++) {
+                            const speed = Math.random() * 5 + 3;
+                            const angle = flareAngle + (Math.random() - 0.5) * 0.5;
+                            particles.push({ x: centerX, y: centerY, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 120 });
+                        }
+                        const planetAngle = Math.atan2(pY - centerY, pX - centerX);
+                        if (Math.abs(flareAngle - planetAngle) < 0.4 || Math.abs(flareAngle - planetAngle + 2*Math.PI) < 0.4 || Math.abs(flareAngle - planetAngle - 2*Math.PI) < 0.4) { planet.isHit = true; planet.hitTimer = 60; }
+                    }
+
+                    particles.forEach((p, i) => {
+                        p.x += p.vx; p.y += p.vy; p.life--;
+                        if (p.life <= 0) particles.splice(i, 1);
+                        ctx.fillStyle = `rgba(251, 191, 36, ${p.life/120})`;
+                        ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, 2 * Math.PI); ctx.fill();
+                    });
+                };
+                
+                const drawConvection = () => {
+                    const centerX = canvas.width / 2; const centerY = canvas.height / 2;
+                    const radius = Math.min(centerX, centerY) * 0.8;
+
+                    ctx.globalCompositeOperation = 'lighter';
+                    particles.forEach(p => {
+                        p.x += p.vx; p.y += p.vy;
+                        const dist = Math.sqrt(p.x * p.x + p.y * p.y);
+                        if (dist > radius) { const angle = Math.atan2(p.y, p.x); p.vx = -Math.cos(angle) * 0.5; p.vy = -Math.sin(angle) * 0.5; }
+                        
+                        const alpha = 1 - (dist / radius);
+                        ctx.fillStyle = p.color;
+                        ctx.beginPath();
+                        ctx.arc(centerX + p.x, centerY + p.y, 5, 0, 2 * Math.PI);
+                        ctx.globalAlpha = alpha * 0.5;
+                        ctx.fill();
+                    });
+                    ctx.globalCompositeOperation = 'source-over';
+                    ctx.globalAlpha = 1;
+
+                    ctx.fillStyle = 'rgba(239, 68, 68, 0.2)'; ctx.beginPath(); ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI); ctx.fill();
+                    ctx.strokeStyle = 'rgba(239, 68, 68, 0.5)'; ctx.lineWidth = 2; ctx.stroke();
+                };
+
+                const draw = () => {
+                    if(!canvas) return;
+                    ctx.clearRect(0,0,canvas.width, canvas.height);
+                    if (state.mode === 'longevity') { drawLongevity(); }
+                    else if (state.mode === 'flares') { drawFlares(); }
+                    else if (state.mode === 'convection') { drawConvection(); }
+                    else { ctx.fillStyle = 'rgba(226, 232, 240, 0.8)'; ctx.font = '20px Inter'; ctx.textAlign = 'center'; ctx.fillText('Selecione uma simulação acima.', canvas.width / 2, canvas.height / 2); }
+                    state.frame++;
+                    requestAnimationFrame(draw);
+                };
+                
+                document.getElementById('sim-longevity').onclick = () => reset('longevity');
+                document.getElementById('sim-flares').onclick = () => reset('flares');
+                document.getElementById('sim-convection').onclick = () => reset('convection');
+                document.getElementById('sim-reset').onclick = () => { state.mode = 'idle'; particles = []; };
+
+                window.addEventListener('resize', resizeCanvas);
+                reset('idle');
+                draw();
+            };
+
+            setupStarfield();
+            setupSimulator();
+        });
+    </script>
+</body>
+</html>
