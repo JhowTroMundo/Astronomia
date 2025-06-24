@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada Interativa pelas Estrelas e Buracos Negros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 50vh;
+            max-height: 550px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 60vh;
+                max-height: 650px;
+            }
+        }
+        .glass-effect {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(51, 65, 85, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl md:text-2xl font-bold text-sky-400">Jornada Estelar</h1>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#intro" class="text-slate-300 hover:text-sky-400 transition-colors">Início</a>
+                    <a href="#stellar-types" class="text-slate-300 hover:text-sky-400 transition-colors">Tipos Estelares</a>
+                    <a href="#properties" class="text-slate-300 hover:text-sky-400 transition-colors">Propriedades</a>
+                    <a href="#simulations" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600 transition-colors font-semibold">Simulações</a>
+                </div>
+                <button id="fullscreen-btn" class="ml-4 p-2 rounded-md bg-slate-700 text-white hover:bg-slate-600 transition-colors hidden md:block" title="Tela Cheia">
+                    &#x26F6; </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="relative py-20 sm:py-32 text-center overflow-hidden">
+            <canvas id="starfield-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Uma Jornada Pelas Possibilidades Cósmicas</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">Explore o fascinante ciclo de vida das estrelas, desde os objetos mais discretos como as anãs marrons até os colossais buracos negros supermassivos. Este site interativo desvenda os segredos do universo através de visualizações e simulações.</p>
+            </div>
+        </section>
+
+        <section id="stellar-types" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Conheça os Gigantes e Anões do Cosmos</h2>
+                    <p class="mt-4 text-lg text-slate-400">Das menores e mais frias às maiores e mais densas, cada tipo estelar tem uma história única no universo.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-amber-400 font-bold text-xl">Anã Marrom</h3>
+                        <p class="text-slate-300 mt-3 text-sm">Objetos subestelares que não possuem massa suficiente para iniciar a fusão sustentada de hidrogênio em seus núcleos. São estrelas "fracassadas" que brilham fracamente.</p>
+                        <p class="text-slate-400 mt-2 text-xs">Exemplo: WISE 0855−0714</p>
+                    </div>
+
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-400 font-bold text-xl">Anã Vermelha</h3>
+                        <p class="text-slate-300 mt-3 text-sm">As estrelas mais comuns e de vida mais longa no universo. Queimam hidrogênio lentamente e podem viver por trilhões de anos.</p>
+                        <p class="text-slate-400 mt-2 text-xs">Exemplo: Proxima Centauri</p>
+                    </div>
+
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-yellow-300 font-bold text-xl">Estrela Tipo Sol</h3>
+                        <p class="text-slate-300 mt-3 text-sm">Estrelas de sequência principal de massa intermediária, como o nosso Sol. Passam a maior parte de suas vidas convertendo hidrogênio em hélio.</p>
+                        <p class="text-slate-400 mt-2 text-xs">Exemplo: Sol</p>
+                    </div>
+
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-orange-400 font-bold text-xl">Gigante Vermelha</h3>
+                        <p class="text-slate-300 mt-3 text-sm">Estágio evolutivo de estrelas de massa intermediária após esgotarem o hidrogênio do núcleo. Elas se expandem e esfriam, ficando avermelhadas e muito maiores.</p>
+                        <p class="text-slate-400 mt-2 text-xs">Exemplo: Arcturus</p>
+                    </div>
+
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-500 font-bold text-xl">Supergigante Vermelha</h3>
+                        <p class="text-slate-300 mt-3 text-sm">As maiores estrelas em termos de volume. São estrelas massivas no estágio final de suas vidas, à beira de uma supernova.</p>
+                        <p class="text-slate-400 mt-2 text-xs">Exemplo: Betelgeuse</p>
+                    </div>
+
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-blue-300 font-bold text-xl">Anã Branca</h3>
+                        <p class="text-slate-300 mt-3 text-sm">O denso núcleo remanescente de uma estrela de massa baixa a média, como o Sol, após ejetar suas camadas externas em uma nebulosa planetária. Não há mais fusão nuclear.</p>
+                        <p class="text-slate-400 mt-2 text-xs">Exemplo: Sirius B</p>
+                    </div>
+
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-sky-400 font-bold text-xl">Estrela de Nêutrons</h3>
+                        <p class="text-slate-300 mt-3 text-sm">Remanescente extremamente denso de uma estrela massiva que explodiu como supernova. Composta principalmente por nêutrons degenerados.</p>
+                        <p class="text-slate-400 mt-2 text-xs">Exemplo: PSR J0348+0432</p>
+                    </div>
+
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-gray-600 font-bold text-xl">Buraco Negro Estelar</h3>
+                        <p class="text-slate-300 mt-3 text-sm">Formado a partir do colapso gravitacional de estrelas muito massivas. Possui uma atração gravitacional tão forte que nada, nem mesmo a luz, pode escapar de seu horizonte de eventos.</p>
+                        <p class="text-slate-400 mt-2 text-xs">Exemplo: Cygnus X-1</p>
+                    </div>
+
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-purple-600 font-bold text-xl">Buraco Negro Supermassivo</h3>
+                        <p class="text-slate-300 mt-3 text-sm">Encontrados nos centros da maioria das galáxias. Podem ter milhões ou bilhões de vezes a massa do Sol, influenciando a evolução galáctica.</p>
+                        <p class="text-slate-400 mt-2 text-xs">Exemplo: Sagitário A*</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="properties" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-white">Propriedades Comparadas</h2>
+                    <p class="mt-4 text-lg text-slate-400">Explore as propriedades físicas extremas dos diferentes objetos celestes.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="propertiesChart"></canvas>
+                </div>
+                 <p class="text-center text-slate-500 mt-4 text-sm">Comparação das propriedades físicas (Massa, Raio, Gravidade, Densidade). Os valores são normalizados para visualização no gráfico, mas os valores reais estão nos detalhes que aparecem ao passar o mouse.</p>
+            </div>
+        </section>
+
+        <section id="simulations" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Simulações Interativas</h2>
+                    <p class="mt-4 text-lg text-slate-400">Visualize processos cósmicos que não são facilmente simulados. Clique nos botões para acionar eventos.</p>
+                </div>
+                <div class="w-full max-w-4xl mx-auto aspect-video glass-effect rounded-lg overflow-hidden">
+                    <canvas id="simulator-canvas"></canvas>
+                </div>
+                <div class="flex justify-center flex-wrap gap-4 mt-8">
+                    <button id="sim-sun-evolution" class="bg-purple-500 text-white px-5 py-2.5 rounded-md hover:bg-purple-600 transition-colors font-semibold">Evolução do Sol</button>
+                    <button id="sim-supernova" class="bg-amber-500 text-white px-5 py-2.5 rounded-md hover:bg-amber-600 transition-colors font-semibold">Simular Supernova</button>
+                    <button id="sim-gravity" class="bg-sky-500 text-white px-5 py-2.5 rounded-md hover:bg-sky-600 transition-colors font-semibold">Testar Gravidade</button>
+                    <button id="sim-bh-accretion" class="bg-gray-700 text-white px-5 py-2.5 rounded-md hover:bg-gray-800 transition-colors font-semibold">Buraco Negro: Acreção</button>
+                    <button id="sim-reset" class="bg-slate-600 text-white px-5 py-2.5 rounded-md hover:bg-slate-700 transition-colors font-semibold">Resetar</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="references" class="py-12 bg-slate-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400">
+                <p>Dados e informações baseados em conhecimentos astrofísicos gerais e fontes como NASA, ESA, Wikipedia e artigos de divulgação científica.</p>
+                <p class="mt-2"><a href="https://en.wikipedia.org/wiki/Main_Page" target="_blank" class="text-sky-400 hover:underline">Referência Geral (Wikipedia)</a></p>
+                <p class="mt-2 text-sm">&copy; 2024 Jornada Interativa Estelar. Todos os direitos reservados.</p>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const setupStarfield = () => {
+                const canvas = document.getElementById('starfield-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let stars = [];
+                const numStars = 200;
+
+                const resizeCanvas = () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = canvas.parentElement.offsetHeight;
+                };
+
+                const createStars = () => {
+                    stars = [];
+                    for (let i = 0; i < numStars; i++) {
+                        stars.push({
+                            x: Math.random() * canvas.width,
+                            y: Math.random() * canvas.height,
+                            radius: Math.random() * 1.5,
+                            alpha: Math.random(),
+                            dAlpha: Math.random() * 0.01 - 0.005
+                        });
+                    }
+                };
+                
+                const animate = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                    stars.forEach(star => {
+                        star.alpha += star.dAlpha;
+                        if (star.alpha <= 0 || star.alpha >= 1) {
+                            star.dAlpha *= -1;
+                        }
+                        ctx.globalAlpha = star.alpha;
+                        ctx.beginPath();
+                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    requestAnimationFrame(animate);
+                };
+
+                window.addEventListener('resize', () => {
+                    resizeCanvas();
+                    createStars();
+                });
+
+                resizeCanvas();
+                createStars();
+                animate();
+            };
+
+            const setupPropertiesChart = () => {
+                const ctx = document.getElementById('propertiesChart');
+                if (!ctx) return;
+
+                // Normalized data (0-100 scale for visual comparison)
+                // Massa (M☉), Raio (km), Gravidade (g), Densidade (kg/m³)
+                // Values are approximate and normalized for visual clarity on radar chart.
+                // Actual values are in the tooltip callback.
+                const dataSets = [
+                    { label: 'Anã Marrom (WISE 0855−0714)', data: [5, 10, 20, 10], bgColor: 'rgba(245, 158, 11, 0.2)', borderColor: 'rgba(245, 158, 11, 1)' },
+                    { label: 'Anã Vermelha (Proxima Centauri)', data: [10, 15, 15, 10], bgColor: 'rgba(239, 68, 68, 0.2)', borderColor: 'rgba(239, 68, 68, 1)' },
+                    { label: 'Estrela Tipo Sol (Sol)', data: [20, 25, 10, 5], bgColor: 'rgba(253, 224, 71, 0.2)', borderColor: 'rgba(253, 224, 71, 1)' },
+                    { label: 'Gigante Vermelha (Arcturus)', data: [30, 70, 1, 1], bgColor: 'rgba(249, 115, 22, 0.2)', borderColor: 'rgba(249, 115, 22, 1)' },
+                    { label: 'Supergigante Vermelha (Betelgeuse)', data: [40, 100, 1, 1], bgColor: 'rgba(239, 68, 68, 0.2)', borderColor: 'rgba(239, 68, 68, 1)' },
+                    { label: 'Anã Branca (Sirius B)', data: [15, 5, 85, 90], bgColor: 'rgba(96, 165, 250, 0.2)', borderColor: 'rgba(96, 165, 250, 1)' },
+                    { label: 'Estrela de Nêutrons (PSR J0348+0432)', data: [25, 1, 100, 100], bgColor: 'rgba(56, 189, 248, 0.2)', borderColor: 'rgba(56, 189, 248, 1)' },
+                    { label: 'Buraco Negro Estelar (Cygnus X-1)', data: [35, 1, 100, 100], bgColor: 'rgba(55, 65, 81, 0.2)', borderColor: 'rgba(55, 65, 81, 1)' },
+                    { label: 'Buraco Negro Supermassivo (Sgr A*)', data: [100, 60, 100, 100], bgColor: 'rgba(147, 51, 234, 0.2)', borderColor: 'rgba(147, 51, 234, 1)' }
+                ];
+
+                const chartDatasets = dataSets.map(ds => ({
+                    label: ds.label,
+                    data: ds.data,
+                    backgroundColor: ds.bgColor,
+                    borderColor: ds.borderColor,
+                    borderWidth: 2,
+                }));
+
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Massa', 'Raio', 'Gravidade', 'Densidade'],
+                        datasets: chartDatasets
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                                grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                                pointLabels: { 
+                                    color: '#e2e8f0',
+                                    font: { size: 14 }
+                                },
+                                ticks: {
+                                    color: '#e2e8f0',
+                                    backdropColor: 'transparent',
+                                    stepSize: 20,
+                                    font: {size: 10}
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 100
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: { color: '#e2e8f0' }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) label += ': ';
+                                        // True values for tooltip, carefully curated for display
+                                        const originalValues = {
+                                            "Anã Marrom (WISE 0855−0714)": ["~0.05 M☉", "~60,000 km", "~100 g", "~10⁴ kg/m³"],
+                                            "Anã Vermelha (Proxima Centauri)": ["~0.1 M☉", "~100,000 km", "~50 g", "~10⁴ kg/m³"],
+                                            "Estrela Tipo Sol (Sol)": ["1 M☉", "696,340 km", "27.9 g", "1,410 kg/m³"],
+                                            "Gigante Vermelha (Arcturus)": ["~5 M☉", "~20,000,000 km", "~0.0001 g", "~10⁻⁶ kg/m³"],
+                                            "Supergigante Vermelha (Betelgeuse)": ["~15 M☉", "~900,000,000 km", "~0.00001 g", "~10⁻⁷ kg/m³"],
+                                            "Anã Branca (Sirius B)": ["~0.7 M☉", "~6,000 km", "~10⁵ g", "~10⁹ kg/m³"],
+                                            "Estrela de Nêutrons (PSR J0348+0432)": ["~1.4 M☉", "~12 km", "~2x10¹¹ g", "~10¹⁷ kg/m³"],
+                                            "Buraco Negro Estelar (Cygnus X-1)": ["~15 M☉", "~45 km (Rsch)", ">10¹² g", ">10¹⁸ kg/m³"],
+                                            "Buraco Negro Supermassivo (Sgr A*)": ["~4x10⁶ M☉", "~12x10⁶ km (Rsch)", ">10¹⁸ g", ">10¹⁸ kg/m³"]
+                                        };
+                                        label += originalValues[context.dataset.label][context.dataIndex];
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+            
+            // This function is not used in the final version but kept for reference
+            const setupPulsarAnimation = () => {};
+
+            const setupSimulator = () => {
+                const canvas = document.getElementById('simulator-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                let state = { mode: 'idle', frame: 0, supernovaRemnant: null };
+                let gravityStar = null; 
+                let sunEvolutionData = { radius: 10, alpha: 1, type: 'main_sequence' };
+                let blackHole = null;
+                let accretionParticles = [];
+
+                const resizeCanvas = () => {
+                    canvas.width = canvas.parentElement.clientWidth;
+                    canvas.height = canvas.parentElement.clientHeight;
+                };
+                
+                const reset = () => {
+                    particles = [];
+                    state = { mode: 'idle', frame: 0, supernovaRemnant: null };
+                    gravityStar = null;
+                    sunEvolutionData = { radius: 10, alpha: 1, type: 'main_sequence' };
+                    blackHole = null;
+                    accretionParticles = [];
+                };
+                
+                const createParticle = (x, y, vx, vy, life, type = 'debris', color = '#e2e8f0') => {
+                    particles.push({ x, y, vx, vy, life, maxLife: life, type, color });
+                };
+
+                const draw = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    if (state.mode === 'idle') {
+                         ctx.fillStyle = 'rgba(226, 232, 240, 0.8)';
+                         ctx.font = '20px Inter';
+                         ctx.textAlign = 'center';
+                         ctx.fillText('Clique em um botão para começar uma simulação', canvas.width / 2, canvas.height / 2);
+                    }
+                    
+                    // Supernova Simulation
+                    if (state.mode === 'supernova') {
+                        const centerX = canvas.width / 2;
+                        const centerY = canvas.height / 2;
+                        if (state.frame < 60) {
+                            const size = 10 + state.frame * 0.5;
+                            ctx.fillStyle = `hsl(${60 - state.frame}, 100%, 50%)`;
+                            ctx.beginPath();
+                            ctx.arc(centerX, centerY, size, 0, Math.PI * 2);
+                            ctx.fill();
+                        } else if (state.frame === 60) {
+                            // CORRECTED: Particles are now created and will be rendered by the general particle loop
+                            for (let i = 0; i < 300; i++) {
+                                const angle = Math.random() * Math.PI * 2;
+                                const speed = Math.random() * 5 + 2;
+                                createParticle(centerX, centerY, Math.cos(angle) * speed, Math.sin(angle) * speed, 120);
+                            }
+                            state.supernovaRemnant = { x: centerX, y: centerY, radius: 8 }; // Create neutron star remnant
+                        } else if (state.frame > 60 && state.supernovaRemnant) {
+                            // Draw the neutron star remnant
+                            ctx.fillStyle = 'white';
+                            ctx.beginPath();
+                            ctx.arc(state.supernovaRemnant.x, state.supernovaRemnant.y, state.supernovaRemnant.radius, 0, Math.PI * 2);
+                            ctx.shadowColor = '#38bdf8';
+                            ctx.shadowBlur = 20;
+                            ctx.fill();
+                            ctx.shadowBlur = 0;
+                            if (state.frame >= 250) {
+                                state.mode = 'post-supernova';
+                            }
+                        }
+                    } else if (state.mode === 'post-supernova') {
+                        if (state.supernovaRemnant) {
+                            ctx.fillStyle = 'white';
+                            ctx.beginPath();
+                            ctx.arc(state.supernovaRemnant.x, state.supernovaRemnant.y, state.supernovaRemnant.radius, 0, Math.PI * 2);
+                            ctx.shadowColor = '#38bdf8';
+                            ctx.shadowBlur = 20;
+                            ctx.fill();
+                            ctx.shadowBlur = 0;
+                        }
+                    }
+
+                    // Sun Evolution Simulation
+                    if (state.mode === 'sun_evolution') {
+                        const centerX = canvas.width / 2;
+                        const centerY = canvas.height / 2;
+
+                        if (sunEvolutionData.type === 'main_sequence') {
+                             // CORRECTED: Color now shifts from yellow to red during expansion
+                            if (state.frame > 50) {
+                                sunEvolutionData.radius += 0.2;
+                                if (sunEvolutionData.radius >= 120) sunEvolutionData.type = 'red_giant';
+                                
+                                const expansionProgress = Math.max(0, (sunEvolutionData.radius - 10) / (120 - 10)); // 0 to 1
+                                const hue = 50 - (50 * expansionProgress); // 50 (yellow) down to 0 (red)
+                                ctx.fillStyle = `hsl(${hue}, 95%, 55%)`;
+
+                            } else {
+                                ctx.fillStyle = '#fde047'; // Initial yellow
+                            }
+                            ctx.beginPath();
+                            ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2);
+                            ctx.fill();
+
+                        } else if (sunEvolutionData.type === 'red_giant') {
+                            ctx.fillStyle = '#ef4444';
+                            ctx.beginPath();
+                            ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2);
+                            ctx.fill();
+                            if (state.frame % 3 === 0 && particles.length < 800) {
+                                const angle = Math.random() * Math.PI * 2;
+                                const dist = sunEvolutionData.radius * (0.8 + Math.random() * 0.2);
+                                const speed = Math.random() * 0.8 + 0.3;
+                                createParticle(centerX + Math.cos(angle) * dist, centerY + Math.sin(angle) * dist, Math.cos(angle) * speed, Math.sin(angle) * speed, 300, 'gas', 'rgba(129, 140, 248, 0.8)');
+                            }
+                            if (state.frame > 250) {
+                                sunEvolutionData.radius -= 0.5;
+                                sunEvolutionData.alpha -= 0.008;
+                                if (sunEvolutionData.alpha <= 0.05 || sunEvolutionData.radius <= 5) sunEvolutionData.type = 'white_dwarf';
+                            }
+                        } else if (sunEvolutionData.type === 'white_dwarf') {
+                            ctx.fillStyle = '#60a5fa';
+                            ctx.beginPath();
+                            ctx.arc(centerX, centerY, 5, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+
+                        if (sunEvolutionData.type === 'white_dwarf' && particles.length === 0 && state.frame > 350) {
+                            state.mode = 'post-sun-evolution';
+                        }
+                    }
+
+                    // Gravity Test Simulation
+                    if(state.mode === 'gravity') {
+                       const centerX = canvas.width / 2;
+                       const centerY = canvas.height / 2;
+                       const G = 0.5;
+                       
+                       if (!gravityStar) {
+                           gravityStar = { x: centerX, y: centerY, radius: 15, mass: 1000 };
+                       }
+                       ctx.fillStyle = '#fde047';
+                       ctx.beginPath();
+                       ctx.arc(gravityStar.x, gravityStar.y, gravityStar.radius, 0, Math.PI * 2);
+                       ctx.shadowColor = '#f59e0b';
+                       ctx.shadowBlur = 20;
+                       ctx.fill();
+                       ctx.shadowBlur = 0;
+
+                       particles.forEach(p => {
+                           const dx = gravityStar.x - p.x;
+                           const dy = gravityStar.y - p.y;
+                           const distSq = dx * dx + dy * dy;
+                           if(distSq > 1) {
+                               const forceMagnitude = G * gravityStar.mass / distSq; 
+                               p.vx += forceMagnitude * dx / Math.sqrt(distSq);
+                               p.vy += forceMagnitude * dy / Math.sqrt(distSq);
+                           }
+                       });
+                    }
+
+                    // Black Hole Accretion Simulation
+                    if (state.mode === 'bh_accretion') {
+                        const centerX = canvas.width / 2;
+                        const centerY = canvas.height / 2;
+
+                        if (!blackHole) {
+                            blackHole = { x: centerX, y: centerY, radius: 10, mass: 5000 };
+                        }
+
+                        ctx.fillStyle = '#1e293b';
+                        ctx.beginPath();
+                        ctx.arc(blackHole.x, blackHole.y, blackHole.radius, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        if (state.frame % 2 === 0 && accretionParticles.length < 300) {
+                            const angle = Math.random() * Math.PI * 2;
+                            const dist = Math.random() * 100 + 50;
+                            accretionParticles.push({
+                                x: blackHole.x + Math.cos(angle) * dist,
+                                y: blackHole.y + Math.sin(angle) * dist,
+                                vx: (-Math.sin(angle) * 2),
+                                vy: (Math.cos(angle) * 2),
+                                life: 150,
+                                maxLife: 150
+                            });
+                        }
+
+                        let nextAccretionParticles = [];
+                        accretionParticles.forEach(p => {
+                            const dx = blackHole.x - p.x;
+                            const dy = blackHole.y - p.y;
+                            const distSq = dx * dx + dy * dy;
+                            const dist = Math.sqrt(distSq);
+
+                            if (dist > blackHole.radius) {
+                                const force = blackHole.mass / distSq * 0.005;
+                                p.vx += force * dx / dist;
+                                p.vy += force * dy / dist;
+
+                                const angularForce = 0.00001;
+                                p.vx += -dy * angularForce;
+                                p.vy += dx * angularForce;
+
+                                p.x += p.vx;
+                                p.y += p.vy;
+                            } else {
+                                p.life = 0;
+                            }
+
+                            p.life--;
+                            if (p.life > 0) {
+                                ctx.globalAlpha = p.life / p.maxLife;
+                                ctx.fillStyle = `hsl(${p.life * 2}, 100%, 70%)`;
+                                ctx.beginPath();
+                                ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+                                ctx.fill();
+                                ctx.globalAlpha = 1;
+                                nextAccretionParticles.push(p);
+                            }
+                        });
+                        accretionParticles = nextAccretionParticles;
+                    }
+                    
+                    // CORRECTED: GENERAL PARTICLE LOOP
+                    // This loop now processes particles for ANY simulation, including Supernova.
+                    let nextParticles = [];
+                    particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.life--;
+                        if (p.life > 0) {
+                            ctx.globalAlpha = p.life / p.maxLife;
+                            ctx.fillStyle = p.color;
+                            ctx.beginPath();
+                            // Use rect for gravity particles, arc for others
+                            if (p.type === 'debris') {
+                               ctx.arc(p.x, p.y, 1, 0, Math.PI*2);
+                            } else {
+                               ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+                            }
+                            ctx.fill();
+                            ctx.globalAlpha = 1;
+                            nextParticles.push(p);
+                        }
+                    });
+                    particles = nextParticles;
+
+                    state.frame++;
+                    requestAnimationFrame(draw);
+                };
+                
+                document.getElementById('sim-sun-evolution').onclick = () => { reset(); state.mode = 'sun_evolution'; state.frame = 0; sunEvolutionData = { radius: 10, alpha: 1, type: 'main_sequence' }; };
+                document.getElementById('sim-supernova').onclick = () => { reset(); state.mode = 'supernova'; state.frame = 0; state.supernovaRemnant = null; };
+                document.getElementById('sim-gravity').onclick = () => {
+                    reset();
+                    state.mode = 'gravity';
+                    gravityStar = null; 
+                    for(let i=0; i<100; i++) {
+                        createParticle(Math.random() * canvas.width, Math.random() * canvas.height, 0, 0, 300); 
+                    }
+                };
+                document.getElementById('sim-bh-accretion').onclick = () => { reset(); state.mode = 'bh_accretion'; state.frame = 0; blackHle = null; accretionParticles = []; };
+                document.getElementById('sim-reset').onclick = reset;
+
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+                draw();
+            };
+
+            const toggleFullscreen = () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.log(`Erro ao tentar ativar o modo tela cheia: ${err.message} (${err.name})`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            };
+
+            document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
+
+            setupStarfield();
+            setupPropertiesChart();
+            // setupPulsarAnimation is not called as there is no canvas element with its ID.
+            setupSimulator();
+        });
+    </script>
+</body>
+</html>
