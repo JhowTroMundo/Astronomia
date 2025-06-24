@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrelas Tipo Sol: O Motor da Vida</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .glass-effect { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.3); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl md:text-2xl font-bold text-yellow-300">Estrelas Tipo Sol</h1>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#main-sequence" class="text-slate-300 hover:text-yellow-300 transition-colors">Sequência Principal</a>
+                    <a href="#our-sun" class="text-slate-300 hover:text-yellow-300 transition-colors">Nosso Sol</a>
+                    <a href="#future" class="text-slate-300 hover:text-yellow-300 transition-colors">O Futuro</a>
+                    <a href="#simulator" class="text-slate-300 hover:text-yellow-300 transition-colors">Simulador</a>
+                    <a href="index.html" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600 transition-colors font-semibold">Voltar</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="relative py-20 sm:py-32 text-center overflow-hidden">
+            <canvas id="starfield-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Os Faróis da Estabilidade Cósmica</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">Estrelas de classe G, como o nosso Sol, representam o equilíbrio perfeito entre massa e longevidade, criando condições estáveis por bilhões de anos, que são cruciais para o surgimento da vida como a conhecemos.</p>
+            </div>
+        </section>
+
+        <section id="main-sequence" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">A Longa e Estável Meia-Idade</h2>
+                    <p class="mt-4 text-lg text-slate-400">Uma estrela tipo Sol passa cerca de 90% de sua vida na "sequência principal".</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-slate-300 space-y-4 text-base">
+                        <p><strong class="font-semibold text-yellow-300">Equilíbrio Hidrostático:</strong> Durante esta fase, a estrela existe em um balanço perfeito. A força da gravidade, que tenta esmagar a estrela, é perfeitamente contrabalançada pela pressão externa gerada pela fusão nuclear em seu núcleo.</p>
+                        <p><strong class="font-semibold text-yellow-300">Fusão de Hidrogênio:</strong> No núcleo, a temperaturas de cerca de 15 milhões de graus Celsius, a estrela funde átomos de hidrogênio para criar hélio. Este processo, chamado de cadeia próton-próton, libera uma quantidade imensa de energia na forma de luz e calor.</p>
+                        <p><strong class="font-semibold text-yellow-300">Duração:</strong> Para uma estrela com a massa do Sol, esta fase estável dura aproximadamente 10 bilhões de anos. Ela é a fase mais longa e produtiva da vida da estrela.</p>
+                    </div>
+                    <div class="flex justify-center items-center p-8">
+                        <div class="relative w-72 h-72 flex items-center justify-center">
+                            <div class="absolute w-full h-full rounded-full bg-yellow-400 opacity-20 animate-pulse" style="animation-duration: 3s;"></div>
+                            <div class="w-5/6 h-5/6 rounded-full bg-yellow-400/80 shadow-2xl shadow-yellow-400/30 flex items-center justify-center text-center">
+                                 <span class="text-slate-900 text-lg font-bold">Gravidade<br/>vs<br/>Pressão de Fusão</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="our-sun" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold">
+                        <a href="https://en.wikipedia.org/wiki/Sun" target="_blank" rel="noopener noreferrer" class="text-white hover:text-yellow-300 hover:underline transition-colors">
+                            Estudo de Caso: O Sol
+                        </a>
+                    </h2>
+                    <p class="mt-4 text-lg text-slate-400">A estrela no coração do nosso sistema solar e a fonte de toda a vida na Terra.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-yellow-300 font-bold text-xl">Idade</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~4.6 Bilhões de Anos</p>
+                        <p class="text-slate-400 mt-2">Na metade de sua vida</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-yellow-300 font-bold text-xl">Tipo Espectral</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">G2V</p>
+                        <p class="text-slate-400 mt-2">Uma anã amarela</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-yellow-300 font-bold text-xl">Diâmetro</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">1.39 milhões de km</p>
+                        <p class="text-slate-400 mt-2">109 vezes o da Terra</p>
+                    </div>
+                     <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-yellow-300 font-bold text-xl">Temperatura</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~5,500 °C</p>
+                        <p class="text-slate-400 mt-2">Na superfície (fotosfera)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-white">O Fim da Estabilidade</h2>
+                <p class="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">Em cerca de 5 bilhões de anos, o Sol esgotará o hidrogênio em seu núcleo. Sem a força da fusão para se sustentar, ele começará a colapsar, aquecendo e expandindo suas camadas externas. Ele se transformará em uma <strong class="text-orange-400">gigante vermelha</strong>, engolindo Mercúrio, Vênus e possivelmente a Terra, antes de seu fim como uma <strong class="text-blue-300">anã branca</strong>.</p>
+            </div>
+        </section>
+        
+        <section id="simulator" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Simulador da Evolução Solar</h2>
+                    <p class="mt-4 text-lg text-slate-400">Assista ao ciclo de vida de uma estrela como o Sol, desde a sequência principal até o seu fim.</p>
+                </div>
+                <div class="w-full max-w-4xl mx-auto aspect-video glass-effect rounded-lg overflow-hidden">
+                    <canvas id="simulator-canvas"></canvas>
+                </div>
+                <div class="flex justify-center flex-wrap gap-4 mt-8">
+                    <button id="sim-sun-evolution" class="bg-purple-500 text-white px-5 py-2.5 rounded-md hover:bg-purple-600 transition-colors font-semibold">Iniciar Evolução do Sol</button>
+                    <button id="sim-reset" class="bg-slate-600 text-white px-5 py-2.5 rounded-md hover:bg-slate-700 transition-colors font-semibold">Resetar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const setupStarfield = () => {
+                const canvas = document.getElementById('starfield-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let stars = []; const numStars = 200;
+                const resize = () => { if(canvas){canvas.width = window.innerWidth; canvas.height = canvas.parentElement.offsetHeight;} };
+                const create = () => { stars = []; if(canvas){for (let i = 0; i < numStars; i++) { stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, alpha: Math.random(), dAlpha: Math.random() * 0.01 - 0.005 }); }} };
+                const animate = () => { if(canvas){ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'; stars.forEach(star => { star.alpha += star.dAlpha; if (star.alpha <= 0 || star.alpha >= 1) star.dAlpha *= -1; ctx.globalAlpha = star.alpha; ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); ctx.fill(); });} requestAnimationFrame(animate); };
+                window.addEventListener('resize', resize);
+                resize(); create(); animate();
+            };
+            
+            const setupSimulator = () => {
+                const canvas = document.getElementById('simulator-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let state = { mode: 'idle', frame: 0 };
+                let particles, sunEvolutionData;
+
+                const resizeCanvas = () => { if(canvas) { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; }};
+                
+                const reset = (mode = 'idle') => {
+                    state.mode = mode;
+                    state.frame = 0;
+                    particles = [];
+                    sunEvolutionData = { radius: 20, alpha: 1, type: 'main_sequence' };
+                };
+                
+                const createParticle = (x, y, vx, vy, life, color) => {
+                    particles.push({ x, y, vx, vy, life, maxLife: life, color });
+                };
+
+                const draw = () => {
+                    if(!canvas) return;
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    ctx.clearRect(0,0,canvas.width, canvas.height);
+
+                    if (state.mode === 'sun_evolution') {
+                        if (sunEvolutionData.type === 'main_sequence') {
+                            if (state.frame > 100) {
+                                sunEvolutionData.radius += 0.5;
+                                if (sunEvolutionData.radius >= 120) sunEvolutionData.type = 'red_giant';
+                                const expansionProgress = Math.max(0, (sunEvolutionData.radius - 20) / 100);
+                                const hue = 50 - (50 * expansionProgress);
+                                ctx.fillStyle = `hsl(${hue}, 95%, 55%)`;
+                            } else {
+                                ctx.fillStyle = '#fde047';
+                            }
+                            ctx.beginPath(); ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2); ctx.fill();
+
+                        } else if (sunEvolutionData.type === 'red_giant') {
+                            ctx.fillStyle = '#ef4444';
+                            ctx.beginPath(); ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2); ctx.fill();
+                            if (state.frame % 3 === 0 && particles.length < 500) {
+                                const angle = Math.random() * Math.PI * 2;
+                                const dist = sunEvolutionData.radius * (0.8 + Math.random() * 0.2);
+                                const speed = Math.random() * 0.8 + 0.3;
+                                createParticle(centerX + Math.cos(angle) * dist, centerY + Math.sin(angle) * dist, Math.cos(angle) * speed, Math.sin(angle) * speed, 300, 'rgba(129, 140, 248, 0.8)');
+                            }
+                            if (state.frame > 400) {
+                                sunEvolutionData.radius -= 0.5;
+                                if (sunEvolutionData.radius <= 10) sunEvolutionData.type = 'white_dwarf';
+                            }
+                        } else if (sunEvolutionData.type === 'white_dwarf') {
+                            ctx.fillStyle = '#60a5fa';
+                            ctx.beginPath(); ctx.arc(centerX, centerY, 10, 0, Math.PI * 2); ctx.fill();
+                        }
+                    } else {
+                         ctx.fillStyle = 'rgba(226, 232, 240, 0.8)'; ctx.font = '20px Inter'; ctx.textAlign = 'center';
+                         ctx.fillText('Clique no botão para iniciar a evolução do Sol.', centerX, centerY);
+                    }
+
+                    let nextParticles = [];
+                    particles.forEach(p => {
+                        p.x += p.vx; p.y += p.vy; p.life--;
+                        if (p.life > 0) {
+                            ctx.globalAlpha = p.life / p.maxLife; ctx.fillStyle = p.color;
+                            ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); ctx.fill();
+                            ctx.globalAlpha = 1;
+                            nextParticles.push(p);
+                        }
+                    });
+                    particles = nextParticles;
+
+                    state.frame++;
+                    requestAnimationFrame(draw);
+                };
+                
+                document.getElementById('sim-sun-evolution').onclick = () => reset('sun_evolution');
+                document.getElementById('sim-reset').onclick = () => reset('idle');
+
+                window.addEventListener('load', () => {
+                    resizeCanvas();
+                    reset('idle');
+                    draw();
+                });
+                
+                window.addEventListener('resize', resizeCanvas);
+            };
+
+            setupStarfield();
+            setupSimulator();
+        });
+    </script>
+</body>
+</html>
