@@ -67,7 +67,11 @@
         <section id="arcturus" class="py-20 sm:py-24">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold text-white">Estudo de Caso: Arcturus</h2>
+                    <h2 class="text-3xl font-bold">
+                        <a href="https://en.wikipedia.org/wiki/Arcturus" target="_blank" rel="noopener noreferrer" class="text-white hover:text-orange-400 hover:underline transition-colors">
+                            Estudo de Caso: Arcturus
+                        </a>
+                    </h2>
                     <p class="mt-4 text-lg text-slate-400">A estrela mais brilhante da constelação de Boötes e um exemplo clássico de gigante vermelha.</p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -122,49 +126,19 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Script para o fundo de estrelas
             const setupStarfield = () => {
                 const canvas = document.getElementById('starfield-canvas');
                 if (!canvas) return;
                 const ctx = canvas.getContext('2d');
                 let stars = [];
                 const numStars = 200;
-                const resizeCanvas = () => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = canvas.parentElement.offsetHeight;
-                };
-                const createStars = () => {
-                    stars = [];
-                    for (let i = 0; i < numStars; i++) {
-                        stars.push({
-                            x: Math.random() * canvas.width,
-                            y: Math.random() * canvas.height,
-                            radius: Math.random() * 1.5,
-                            alpha: Math.random(),
-                            dAlpha: Math.random() * 0.01 - 0.005
-                        });
-                    }
-                };
-                const animate = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-                    stars.forEach(star => {
-                        star.alpha += star.dAlpha;
-                        if (star.alpha <= 0 || star.alpha >= 1) star.dAlpha *= -1;
-                        ctx.globalAlpha = star.alpha;
-                        ctx.beginPath();
-                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                        ctx.fill();
-                    });
-                    requestAnimationFrame(animate);
-                };
+                const resizeCanvas = () => { canvas.width = window.innerWidth; canvas.height = canvas.parentElement.offsetHeight; };
+                const createStars = () => { stars = []; for (let i = 0; i < numStars; i++) { stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, alpha: Math.random(), dAlpha: Math.random() * 0.01 - 0.005 }); } };
+                const animate = () => { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'; stars.forEach(star => { star.alpha += star.dAlpha; if (star.alpha <= 0 || star.alpha >= 1) star.dAlpha *= -1; ctx.globalAlpha = star.alpha; ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); ctx.fill(); }); requestAnimationFrame(animate); };
                 window.addEventListener('resize', () => { resizeCanvas(); createStars(); });
-                resizeCanvas();
-                createStars();
-                animate();
+                resizeCanvas(); createStars(); animate();
             };
             
-            // ALTERADO: Adicionado o setupSimulator
             const setupSimulator = () => {
                 const canvas = document.getElementById('simulator-canvas');
                 if (!canvas) return;
@@ -172,134 +146,42 @@
                 let particles = [];
                 let state = { mode: 'idle', frame: 0, supernovaRemnant: null };
                 let sunEvolutionData = { radius: 10, alpha: 1, type: 'main_sequence' };
-
-                const resizeCanvas = () => {
-                    canvas.width = canvas.parentElement.clientWidth;
-                    canvas.height = canvas.parentElement.clientHeight;
-                };
-                
-                const reset = () => {
-                    particles = [];
-                    state = { mode: 'idle', frame: 0, supernovaRemnant: null };
-                    sunEvolutionData = { radius: 10, alpha: 1, type: 'main_sequence' };
-                };
-                
-                const createParticle = (x, y, vx, vy, life, type = 'debris', color = '#e2e8f0') => {
-                    particles.push({ x, y, vx, vy, life, maxLife: life, type, color });
-                };
-
+                const resizeCanvas = () => { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; };
+                const reset = () => { particles = []; state = { mode: 'idle', frame: 0, supernovaRemnant: null }; sunEvolutionData = { radius: 10, alpha: 1, type: 'main_sequence' }; };
+                const createParticle = (x, y, vx, vy, life, type = 'debris', color = '#e2e8f0') => { particles.push({ x, y, vx, vy, life, maxLife: life, type, color }); };
                 const draw = () => {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                    if (state.mode === 'idle') {
-                         ctx.fillStyle = 'rgba(226, 232, 240, 0.8)';
-                         ctx.font = '20px Inter';
-                         ctx.textAlign = 'center';
-                         ctx.fillText('Clique em um botão para começar uma simulação', canvas.width / 2, canvas.height / 2);
-                    }
-                    
+                    if (state.mode === 'idle') { ctx.fillStyle = 'rgba(226, 232, 240, 0.8)'; ctx.font = '20px Inter'; ctx.textAlign = 'center'; ctx.fillText('Clique em um botão para começar uma simulação', canvas.width / 2, canvas.height / 2); }
                     if (state.mode === 'supernova') {
-                        const centerX = canvas.width / 2;
-                        const centerY = canvas.height / 2;
-                        if (state.frame < 60) {
-                            const size = 10 + state.frame * 0.5;
-                            ctx.fillStyle = `hsl(${60 - state.frame}, 100%, 50%)`;
-                            ctx.beginPath();
-                            ctx.arc(centerX, centerY, size, 0, Math.PI * 2);
-                            ctx.fill();
-                        } else if (state.frame === 60) {
-                            for (let i = 0; i < 300; i++) {
-                                const angle = Math.random() * Math.PI * 2;
-                                const speed = Math.random() * 5 + 2;
-                                createParticle(centerX, centerY, Math.cos(angle) * speed, Math.sin(angle) * speed, 120);
-                            }
-                            state.supernovaRemnant = { x: centerX, y: centerY, radius: 8 };
-                        } else if (state.frame > 60 && state.supernovaRemnant) {
-                            ctx.fillStyle = 'white';
-                            ctx.beginPath();
-                            ctx.arc(state.supernovaRemnant.x, state.supernovaRemnant.y, state.supernovaRemnant.radius, 0, Math.PI * 2);
-                            ctx.shadowColor = '#38bdf8';
-                            ctx.shadowBlur = 20;
-                            ctx.fill();
-                            ctx.shadowBlur = 0;
-                        }
+                        const centerX = canvas.width / 2; const centerY = canvas.height / 2;
+                        if (state.frame < 60) { const size = 10 + state.frame * 0.5; ctx.fillStyle = `hsl(${60 - state.frame}, 100%, 50%)`; ctx.beginPath(); ctx.arc(centerX, centerY, size, 0, Math.PI * 2); ctx.fill(); } 
+                        else if (state.frame === 60) { for (let i = 0; i < 300; i++) { const angle = Math.random() * Math.PI * 2; const speed = Math.random() * 5 + 2; createParticle(centerX, centerY, Math.cos(angle) * speed, Math.sin(angle) * speed, 120); } state.supernovaRemnant = { x: centerX, y: centerY, radius: 8 }; } 
+                        else if (state.frame > 60 && state.supernovaRemnant) { ctx.fillStyle = 'white'; ctx.beginPath(); ctx.arc(state.supernovaRemnant.x, state.supernovaRemnant.y, state.supernovaRemnant.radius, 0, Math.PI * 2); ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 20; ctx.fill(); ctx.shadowBlur = 0; }
                     }
-
                     if (state.mode === 'sun_evolution') {
-                        const centerX = canvas.width / 2;
-                        const centerY = canvas.height / 2;
-
+                        const centerX = canvas.width / 2; const centerY = canvas.height / 2;
                         if (sunEvolutionData.type === 'main_sequence') {
-                            if (state.frame > 50) {
-                                sunEvolutionData.radius += 0.2;
-                                if (sunEvolutionData.radius >= 120) sunEvolutionData.type = 'red_giant';
-                                
-                                const expansionProgress = Math.max(0, (sunEvolutionData.radius - 10) / (120 - 10));
-                                const hue = 50 - (50 * expansionProgress);
-                                ctx.fillStyle = `hsl(${hue}, 95%, 55%)`;
-
-                            } else {
-                                ctx.fillStyle = '#fde047';
-                            }
-                            ctx.beginPath();
-                            ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2);
-                            ctx.fill();
-
+                            if (state.frame > 50) { sunEvolutionData.radius += 0.2; if (sunEvolutionData.radius >= 120) sunEvolutionData.type = 'red_giant'; const expansionProgress = Math.max(0, (sunEvolutionData.radius - 10) / (120 - 10)); const hue = 50 - (50 * expansionProgress); ctx.fillStyle = `hsl(${hue}, 95%, 55%)`; } else { ctx.fillStyle = '#fde047'; }
+                            ctx.beginPath(); ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2); ctx.fill();
                         } else if (sunEvolutionData.type === 'red_giant') {
-                            ctx.fillStyle = '#ef4444';
-                            ctx.beginPath();
-                            ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2);
-                            ctx.fill();
-                            if (state.frame % 3 === 0 && particles.length < 800) {
-                                const angle = Math.random() * Math.PI * 2;
-                                const dist = sunEvolutionData.radius * (0.8 + Math.random() * 0.2);
-                                const speed = Math.random() * 0.8 + 0.3;
-                                createParticle(centerX + Math.cos(angle) * dist, centerY + Math.sin(angle) * dist, Math.cos(angle) * speed, Math.sin(angle) * speed, 300, 'gas', 'rgba(129, 140, 248, 0.8)');
-                            }
-                            if (state.frame > 250) {
-                                sunEvolutionData.radius -= 0.5;
-                                if (sunEvolutionData.radius <= 5) sunEvolutionData.type = 'white_dwarf';
-                            }
-                        } else if (sunEvolutionData.type === 'white_dwarf') {
-                            ctx.fillStyle = '#60a5fa';
-                            ctx.beginPath();
-                            ctx.arc(centerX, centerY, 5, 0, Math.PI * 2);
-                            ctx.fill();
-                        }
+                            ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2); ctx.fill();
+                            if (state.frame % 3 === 0 && particles.length < 800) { const angle = Math.random() * Math.PI * 2; const dist = sunEvolutionData.radius * (0.8 + Math.random() * 0.2); const speed = Math.random() * 0.8 + 0.3; createParticle(centerX + Math.cos(angle) * dist, centerY + Math.sin(angle) * dist, Math.cos(angle) * speed, Math.sin(angle) * speed, 300, 'gas', 'rgba(129, 140, 248, 0.8)'); }
+                            if (state.frame > 250) { sunEvolutionData.radius -= 0.5; if (sunEvolutionData.radius <= 5) sunEvolutionData.type = 'white_dwarf'; }
+                        } else if (sunEvolutionData.type === 'white_dwarf') { ctx.fillStyle = '#60a5fa'; ctx.beginPath(); ctx.arc(centerX, centerY, 5, 0, Math.PI * 2); ctx.fill(); }
                     }
-                    
                     let nextParticles = [];
-                    particles.forEach(p => {
-                        p.x += p.vx;
-                        p.y += p.vy;
-                        p.life--;
-                        if (p.life > 0) {
-                            ctx.globalAlpha = p.life / p.maxLife;
-                            ctx.fillStyle = p.color;
-                            ctx.beginPath();
-                            ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
-                            ctx.fill();
-                            ctx.globalAlpha = 1;
-                            nextParticles.push(p);
-                        }
-                    });
+                    particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.life--; if (p.life > 0) { ctx.globalAlpha = p.life / p.maxLife; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill(); ctx.globalAlpha = 1; nextParticles.push(p); } });
                     particles = nextParticles;
-
-                    state.frame++;
-                    requestAnimationFrame(draw);
+                    state.frame++; requestAnimationFrame(draw);
                 };
-                
-                document.getElementById('sim-sun-evolution').onclick = () => { reset(); state.mode = 'sun_evolution'; state.frame = 0; };
-                document.getElementById('sim-supernova').onclick = () => { reset(); state.mode = 'supernova'; state.frame = 0; };
+                document.getElementById('sim-sun-evolution').onclick = () => { reset(); state.mode = 'sun_evolution'; };
+                document.getElementById('sim-supernova').onclick = () => { reset(); state.mode = 'supernova'; };
                 document.getElementById('sim-reset').onclick = reset;
-
                 window.addEventListener('resize', resizeCanvas);
-                resizeCanvas();
-                draw();
+                resizeCanvas(); draw();
             };
-
             setupStarfield();
-            setupSimulator(); // Chamar a nova função
+            setupSimulator();
         });
     </script>
 </body>
