@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supergigantes Vermelhas: Titãs do Cosmos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .glass-effect { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.3); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl md:text-2xl font-bold text-red-500">Supergigantes Vermelhas</h1>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#scale" class="text-slate-300 hover:text-red-500 transition-colors">Escala</a>
+                    <a href="#betelgeuse" class="text-slate-300 hover:text-red-500 transition-colors">Betelgeuse</a>
+                    <a href="#instability" class="text-slate-300 hover:text-red-500 transition-colors">Instabilidade</a>
+                    <a href="#simulator" class="text-slate-300 hover:text-red-500 transition-colors">Simulador</a>
+                    <a href="index.html" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600 transition-colors font-semibold">Voltar</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="relative py-20 sm:py-32 text-center overflow-hidden">
+            <canvas id="starfield-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">As Maiores Estrelas do Universo</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">Supergigantes vermelhas são as maiores estrelas que existem em termos de volume. São monstros inchados e relativamente frios, vivendo os últimos e dramáticos momentos de suas vidas antes de uma morte espetacular.</p>
+            </div>
+        </section>
+
+        <section id="scale" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Uma Escala Inimaginável</h2>
+                    <p class="mt-4 text-lg text-slate-400">É difícil compreender o tamanho de uma supergigante vermelha. Elas são verdadeiros titãs cósmicos.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-slate-300 space-y-4 text-base">
+                        <p><strong class="font-semibold text-red-500">Engolindo Sistemas Solares:</strong> Se colocássemos uma supergigante como Betelgeuse no centro do nosso sistema solar, sua superfície se estenderia para além das órbitas de Mercúrio, Vênus, Terra, Marte e até mesmo Júpiter. Todos os planetas rochosos seriam vaporizados.</p>
+                        <p><strong class="font-semibold text-red-500">Baixa Densidade:</strong> Apesar de seu tamanho imenso, sua massa (geralmente de 10 a 40 vezes a do Sol) está espalhada por um volume colossal. Isso significa que sua atmosfera é extremamente tênue, menos densa que a atmosfera da Terra ao nível do mar.</p>
+                        <p><strong class="font-semibold text-red-500">Vida Curta e Furiosa:</strong> Estrelas tão massivas queimam seu combustível nuclear a uma taxa absurdamente alta. Enquanto o Sol viverá por 10 bilhões de anos, uma supergigante vive por apenas alguns milhões de anos antes de esgotar seu combustível.</p>
+                    </div>
+                    <div class="flex justify-center items-center p-8">
+                        <div class="relative w-72 h-72 flex items-center justify-center">
+                            <div class="absolute w-full h-full rounded-full bg-red-700 opacity-50 animate-pulse" style="animation-duration: 4s;"></div>
+                            <div class="absolute w-1/2 h-1/2 border-2 border-dashed border-yellow-400 rounded-full flex items-center justify-center text-center">
+                               <span class="text-yellow-400 text-xs">Órbita de Júpiter</span>
+                            </div>
+                             <div class="absolute w-2 h-2 rounded-full bg-yellow-300"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="betelgeuse" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold">
+                        <a href="https://en.wikipedia.org/wiki/Betelgeuse" target="_blank" rel="noopener noreferrer" class="text-white hover:text-red-500 hover:underline transition-colors">
+                            Estudo de Caso: Betelgeuse
+                        </a>
+                    </h2>
+                    <p class="mt-4 text-lg text-slate-400">A famosa estrela no "ombro" da constelação de Órion e a candidata a supernova mais próxima da Terra.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-500 font-bold text-xl">Distância</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~548 anos-luz</p>
+                        <p class="text-slate-400 mt-2">Relativamente próxima em escala galáctica</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-500 font-bold text-xl">Massa</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~16.5–19 M☉</p>
+                        <p class="text-slate-400 mt-2">Uma estrela verdadeiramente massiva</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-500 font-bold text-xl">Raio</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~764 R☉</p>
+                        <p class="text-slate-400 mt-2">Centenas de vezes maior que o Sol</p>
+                    </div>
+                     <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-red-500 font-bold text-xl">Próxima Supernova?</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">Sim!</p>
+                        <p class="text-slate-400 mt-2">Pode explodir nos próximos 100.000 anos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="instability" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-white">A Calmaria Antes da Tempestade</h2>
+                <p class="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">O fim de uma supergigante é inevitável e violento. Em seu núcleo, a fusão cria elementos cada vez mais pesados, terminando no ferro. Como a fusão do ferro consome energia em vez de liberá-la, o núcleo colapsa catastroficamente sob seu próprio peso. Esse colapso desencadeia uma <strong class="text-amber-400">supernova Tipo II</strong>, uma das explosões mais poderosas do universo, deixando para trás uma <strong class="text-sky-400">estrela de nêutrons</strong> ou, se a estrela for massiva o suficiente, um <strong class="text-purple-400">buraco negro</strong>.</p>
+            </div>
+        </section>
+        
+        <section id="simulator" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Simulador do Titã Cósmico</h2>
+                    <p class="mt-4 text-lg text-slate-400">Explore as características impressionantes de uma supergigante vermelha.</p>
+                </div>
+                <div class="w-full max-w-4xl mx-auto aspect-video glass-effect rounded-lg overflow-hidden">
+                    <canvas id="simulator-canvas"></canvas>
+                </div>
+                <div class="flex justify-center flex-wrap gap-4 mt-8">
+                    <button id="sim-scale" class="bg-red-500 text-white px-5 py-2.5 rounded-md hover:bg-red-600 transition-colors font-semibold">Comparar Escala</button>
+                    <button id="sim-pulsation" class="bg-red-500 text-white px-5 py-2.5 rounded-md hover:bg-red-600 transition-colors font-semibold">Simular Pulsação</button>
+                    <button id="sim-countdown" class="bg-red-500 text-white px-5 py-2.5 rounded-md hover:bg-red-600 transition-colors font-semibold">Contagem Regressiva</button>
+                    <button id="sim-reset" class="bg-slate-600 text-white px-5 py-2.5 rounded-md hover:bg-slate-700 transition-colors font-semibold">Resetar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const setupStarfield = () => { /* ...código do starfield... */ };
+            
+            const setupSimulator = () => {
+                const canvas = document.getElementById('simulator-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let state = { mode: 'idle', frame: 0 };
+                let sun, betelgeuse, jupiterOrbit, particles, core;
+
+                const resizeCanvas = () => { if(canvas) { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; }};
+                
+                const reset = (mode = 'idle') => {
+                    state.mode = mode;
+                    state.frame = 0;
+                    particles = [];
+                    sun = { radius: 2 };
+                    betelgeuse = { radius: 250, alpha: 0 };
+                    jupiterOrbit = { radius: 200 };
+                    core = { radius: 15, layers: 5, instability: 0 };
+                };
+
+                const draw = () => {
+                    if(!canvas) return;
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    ctx.clearRect(0,0,canvas.width, canvas.height);
+
+                    if (state.mode === 'scale') {
+                        // Zoom effect
+                        if (betelgeuse.alpha < 1) betelgeuse.alpha += 0.01;
+                        
+                        // Draw Betelgeuse
+                        ctx.fillStyle = `rgba(239, 68, 68, ${betelgeuse.alpha * 0.5})`;
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, betelgeuse.radius, 0, 2 * Math.PI);
+                        ctx.fill();
+
+                        // Draw Jupiter's orbit
+                        ctx.strokeStyle = `rgba(252, 211, 77, ${betelgeuse.alpha})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, jupiterOrbit.radius, 0, 2 * Math.PI);
+                        ctx.stroke();
+                        ctx.font = '12px Inter'; ctx.fillStyle = `rgba(252, 211, 77, ${betelgeuse.alpha})`; ctx.textAlign = 'center';
+                        ctx.fillText("Órbita de Júpiter", centerX, centerY - jupiterOrbit.radius - 5);
+
+
+                        // Draw Sun
+                        ctx.fillStyle = '#fde047';
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, sun.radius, 0, 2 * Math.PI);
+                        ctx.fill();
+
+                    } else if (state.mode === 'pulsation') {
+                        const pulse = Math.sin(state.frame * 0.02);
+                        const radius = 100 + pulse * 10;
+                        const brightness = 50 + pulse * 5;
+                        ctx.fillStyle = `hsl(15, 100%, ${brightness}%)`;
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+                        ctx.shadowColor = `hsl(15, 100%, ${brightness}%)`;
+                        ctx.shadowBlur = 30;
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+
+                    } else if (state.mode === 'countdown') {
+                        // Supernova countdown
+                        if(state.frame < 300) {
+                            core.instability = state.frame / 300;
+                            // Draw pulsating core
+                            for(let i=core.layers; i > 0; i--) {
+                                const pulse = Math.sin(state.frame * 0.1 + i) * core.instability * 5;
+                                ctx.fillStyle = `hsl(${i*40}, 90%, 50%)`;
+                                ctx.beginPath();
+                                ctx.arc(centerX, centerY, i * 10 + pulse, 0, 2*Math.PI);
+                                ctx.fill();
+                            }
+                        } else { // Explosion
+                            if (particles.length === 0) { // create particles only once
+                                for (let i = 0; i < 400; i++) {
+                                    const angle = Math.random() * Math.PI * 2;
+                                    const speed = Math.random() * 8 + 2;
+                                    particles.push({ x: centerX, y: centerY, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: 150 });
+                                }
+                            }
+                            particles.forEach((p, i) => {
+                                p.x += p.vx; p.y += p.vy; p.life--;
+                                if (p.life <= 0) particles.splice(i, 1);
+                                ctx.fillStyle = `rgba(251, 191, 36, ${p.life/150})`;
+                                ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, 2 * Math.PI); ctx.fill();
+                            });
+                        }
+                    } else {
+                        ctx.fillStyle = 'rgba(226, 232, 240, 0.8)'; ctx.font = '20px Inter'; ctx.textAlign = 'center';
+                        ctx.fillText('Selecione uma simulação acima.', centerX, centerY);
+                    }
+                    state.frame++;
+                    requestAnimationFrame(draw);
+                };
+                
+                document.getElementById('sim-scale').onclick = () => reset('scale');
+                document.getElementById('sim-pulsation').onclick = () => reset('pulsation');
+                document.getElementById('sim-countdown').onclick = () => reset('countdown');
+                document.getElementById('sim-reset').onclick = () => reset('idle');
+
+                window.addEventListener('load', () => {
+                    resizeCanvas();
+                    reset('idle');
+                    draw();
+                });
+                
+                window.addEventListener('resize', resizeCanvas);
+            };
+
+            setupStarfield();
+            setupSimulator();
+        });
+    </script>
+</body>
+</html>
