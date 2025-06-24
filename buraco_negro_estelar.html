@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buracos Negros Estelares: Singularidades no Cosmos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .glass-effect { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.3); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl md:text-2xl font-bold text-gray-400">Buracos Negros Estelares</h1>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#formation" class="text-slate-300 hover:text-gray-400 transition-colors">Formação</a>
+                    <a href="#cygnus-x1" class="text-slate-300 hover:text-gray-400 transition-colors">Cygnus X-1</a>
+                    <a href="#anatomy" class="text-slate-300 hover:text-gray-400 transition-colors">Anatomia</a>
+                    <a href="#simulator" class="text-slate-300 hover:text-gray-400 transition-colors">Simulador</a>
+                    <a href="index.html" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600 transition-colors font-semibold">Voltar</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="relative py-20 sm:py-32 text-center overflow-hidden">
+            <canvas id="starfield-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">O Ponto Final da Matéria</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">Buracos negros estelares são o que resta quando as estrelas mais massivas morrem. Sua gravidade é tão intensa que nada, nem mesmo a luz, pode escapar de seu abraço, criando uma região de onde nenhuma informação retorna.</p>
+            </div>
+        </section>
+
+        <section id="formation" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">O Colapso Inevitável</h2>
+                    <p class="mt-4 text-lg text-slate-400">Eles se formam quando o núcleo de uma estrela massiva colapsa sob seu próprio peso.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-slate-300 space-y-4 text-base">
+                        <p><strong class="font-semibold text-gray-400">Morte de uma Estrela Gigante:</strong> Após uma estrela com mais de 25-30 vezes a massa do Sol explodir em uma supernova, o núcleo remanescente pode ser massivo demais para se estabilizar como uma estrela de nêutrons.</p>
+                        <p><strong class="font-semibold text-gray-400">Gravidade Imbatível:</strong> A força da gravidade do núcleo remanescente é tão esmagadora que supera todas as outras forças conhecidas da natureza. A matéria é comprimida em um ponto de densidade infinita, conhecido como singularidade.</p>
+                        <p><strong class="font-semibold text-gray-400">O Horizonte de Eventos:</strong> Ao redor da singularidade se forma uma fronteira chamada "horizonte de eventos". Esta não é uma superfície física, mas um ponto de não retorno. Qualquer coisa que cruze o horizonte de eventos é inevitavelmente puxada para a singularidade e nunca mais pode escapar.</p>
+                    </div>
+                    <div class="flex justify-center items-center p-8">
+                        <div class="relative w-64 h-64 flex items-center justify-center">
+                            <div class="absolute w-full h-full bg-black rounded-full shadow-2xl shadow-purple-500/20"></div>
+                            <div class="absolute w-2/3 h-2/3 border-2 border-dashed border-purple-400 rounded-full animate-pulse" style="animation-duration: 4s;"></div>
+                             <span class="absolute text-purple-400 text-sm">Horizonte de Eventos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="cygnus-x1" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold">
+                        <a href="https://en.wikipedia.org/wiki/Cygnus_X-1" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-400 hover:underline transition-colors">
+                            Estudo de Caso: Cygnus X-1
+                        </a>
+                    </h2>
+                    <p class="mt-4 text-lg text-slate-400">O primeiro objeto amplamente aceito como um buraco negro e um dos mais estudados.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-gray-400 font-bold text-xl">Massa do Buraco Negro</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~21 M☉</p>
+                        <p class="text-slate-400 mt-2">21 vezes a massa do nosso Sol</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-gray-400 font-bold text-xl">Raio do Horizonte</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~62 km</p>
+                        <p class="text-slate-400 mt-2">Menor que muitas cidades</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-gray-400 font-bold text-xl">Estrela Companheira</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">HDE 226868</p>
+                        <p class="text-slate-400 mt-2">Uma supergigante azul massiva</p>
+                    </div>
+                     <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-gray-400 font-bold text-xl">Distância</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~7,200 anos-luz</p>
+                        <p class="text-slate-400 mt-2">Localizado na constelação de Cygnus</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="anatomy" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                 <h2 class="text-3xl font-bold text-white">Anatomia de um Monstro Cósmico</h2>
+                 <p class="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">Buracos negros são definidos por algumas características principais. A <strong class="text-gray-400">singularidade</strong> é o ponto central de densidade infinita. O <strong class="text-gray-400">horizonte de eventos</strong> é a fronteira de não retorno. Muitas vezes, um <strong class="text-amber-300">disco de acréscimo</strong> de matéria superaquecida se forma ao redor, e <strong class="text-purple-400">jatos relativísticos</strong> de partículas são expelidos dos polos.</p>
+            </div>
+        </section>
+        
+        <section id="simulator" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Simulador de Buracos Negros</h2>
+                    <p class="mt-4 text-lg text-slate-400">Explore os fenômenos que definem estes objetos extremos.</p>
+                </div>
+                <div class="w-full max-w-4xl mx-auto aspect-video glass-effect rounded-lg overflow-hidden">
+                    <canvas id="simulator-canvas"></canvas>
+                </div>
+                <div class="flex justify-center flex-wrap gap-4 mt-8">
+                    <button id="sim-accretion" class="bg-gray-500 text-white px-5 py-2.5 rounded-md hover:bg-gray-600 transition-colors font-semibold">Disco de Acréscimo e Jatos</button>
+                    <button id="sim-spaghettification" class="bg-gray-500 text-white px-5 py-2.5 rounded-md hover:bg-gray-600 transition-colors font-semibold">Espaguetificação</button>
+                    <button id="sim-shadow" class="bg-gray-500 text-white px-5 py-2.5 rounded-md hover:bg-gray-600 transition-colors font-semibold">Sombra do Buraco Negro</button>
+                    <button id="sim-reset" class="bg-slate-600 text-white px-5 py-2.5 rounded-md hover:bg-slate-700 transition-colors font-semibold">Resetar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const setupStarfield = () => { /* ...código omitido... */ };
+            
+            const setupSimulator = () => {
+                const canvas = document.getElementById('simulator-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let state = { mode: 'idle', frame: 0 };
+                let particles, star, blackHole, background;
+
+                const resizeCanvas = () => { if(canvas) { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; }};
+                
+                const reset = (mode = 'idle') => {
+                    state.mode = mode;
+                    state.frame = 0;
+                    particles = [];
+                    star = { x: canvas.width, y: canvas.height/2, radius: 20, isSpaghettified: false, segments: [] };
+                    blackHole = { x: canvas.width / 2, y: canvas.height / 2, radius: 20 };
+                    
+                    if(mode === 'shadow') {
+                        background = ctx.createRadialGradient(centerX, centerY, 50, centerX, centerY, 300);
+                        background.addColorStop(0, 'black');
+                        background.addColorStop(0.2, '#333');
+                        background.addColorStop(0.4, '#ffcc00');
+                        background.addColorStop(1, '#662200');
+                    }
+                };
+                
+                const draw = () => {
+                    if(!canvas) return;
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    ctx.clearRect(0,0,canvas.width, canvas.height);
+
+                    if (state.mode === 'accretion') {
+                        // Disco de Acréscimo
+                        for(let i=0; i<10; i++){
+                           particles.push({angle: Math.random()*2*Math.PI, radius: 150 + Math.random()*50, speed: 0.01 + Math.random()*0.02, life: 200});
+                        }
+                        particles.forEach((p, i) => {
+                           p.angle += p.speed;
+                           p.radius -= 0.5;
+                           p.life--;
+                           if(p.radius < blackHole.radius || p.life <= 0) particles.splice(i, 1);
+                           const x = centerX + p.radius * Math.cos(p.angle);
+                           const y = centerY + p.radius * Math.sin(p.angle) * 0.3; // Efeito de perspectiva
+                           ctx.fillStyle = `hsl(60, 100%, ${100 - p.radius/2}%)`;
+                           ctx.beginPath(); ctx.arc(x, y, 2, 0, 2*Math.PI); ctx.fill();
+                        });
+
+                        // Jatos
+                        if(state.frame % 5 === 0){
+                           for(let i=0; i<2; i++){
+                               particles.push({x: centerX, y: centerY, vx: (Math.random()-0.5)*0.5, vy: -(Math.random()*5+5) * (i===0?1:-1), life: 100, jet: true});
+                           }
+                        }
+                        particles.filter(p=>p.jet).forEach((p,i)=>{
+                            p.x += p.vx; p.y += p.vy; p.life--;
+                            if(p.life <=0) particles.splice(particles.indexOf(p), 1);
+                            ctx.fillStyle = `rgba(192, 132, 252, ${p.life/100})`;
+                            ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, 2*Math.PI); ctx.fill();
+                        });
+
+                        // Buraco Negro
+                        ctx.fillStyle = 'black'; ctx.beginPath(); ctx.arc(centerX, centerY, blackHole.radius, 0, 2*Math.PI); ctx.fill();
+                    }
+                    else if (state.mode === 'spaghettification') {
+                        if (!star.isSpaghettified) {
+                            star.x -= 2;
+                            const dx = star.x - centerX;
+                            const dy = star.y - centerY;
+                            if (Math.sqrt(dx*dx+dy*dy) < 150) {
+                                star.isSpaghettified = true;
+                                for(let i=0; i<30; i++) star.segments.push({x:star.x, y:star.y, angle:Math.random()*Math.PI*2, radius: Math.random()*20});
+                            }
+                        }
+
+                        if(star.isSpaghettified){
+                            star.segments.forEach(s => {
+                                s.radius -= 0.1;
+                                s.angle += 0.05;
+                                const x = centerX + s.radius * Math.cos(s.angle);
+                                const y = centerY + s.radius * Math.sin(s.angle);
+                                ctx.fillStyle = 'white'; ctx.beginPath(); ctx.arc(x,y,2,0,2*Math.PI); ctx.fill();
+                            });
+                        } else {
+                            ctx.fillStyle = '#fde047'; ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, 2*Math.PI); ctx.fill();
+                        }
+                        ctx.fillStyle = 'black'; ctx.beginPath(); ctx.arc(centerX, centerY, blackHole.radius, 0, 2*Math.PI); ctx.fill();
+                    }
+                    else if (state.mode === 'shadow') {
+                        ctx.fillStyle = background;
+                        ctx.fillRect(0,0,canvas.width, canvas.height);
+                        
+                        // Lensing effect (simple version)
+                        ctx.save();
+                        ctx.translate(centerX, centerY);
+                        for(let i=0; i<360; i+=2){
+                           ctx.rotate(2*Math.PI/180);
+                           ctx.drawImage(canvas, -centerX-1, -centerY, canvas.width, canvas.height);
+                        }
+                        ctx.restore();
+
+                        // Photon sphere
+                        ctx.strokeStyle = 'white'; ctx.lineWidth = 2; ctx.shadowColor = 'white'; ctx.shadowBlur = 15;
+                        ctx.beginPath(); ctx.arc(centerX, centerY, 50, 0, 2*Math.PI); ctx.stroke();
+                        ctx.shadowBlur = 0;
+                        
+                        // Event Horizon (Shadow)
+                        ctx.fillStyle = 'black'; ctx.beginPath(); ctx.arc(centerX, centerY, 48, 0, 2*Math.PI); ctx.fill();
+                    }
+                    else {
+                        ctx.fillStyle = 'rgba(226, 232, 240, 0.8)'; ctx.font = '20px Inter'; ctx.textAlign = 'center';
+                        ctx.fillText('Selecione uma simulação acima.', centerX, centerY);
+                    }
+                    state.frame++;
+                    requestAnimationFrame(draw);
+                };
+                
+                document.getElementById('sim-accretion').onclick = () => reset('accretion');
+                document.getElementById('sim-spaghettification').onclick = () => reset('spaghettification');
+                document.getElementById('sim-shadow').onclick = () => reset('shadow');
+                document.getElementById('sim-reset').onclick = () => reset('idle');
+                
+                window.addEventListener('load', () => { resizeCanvas(); reset('idle'); draw(); });
+                window.addEventListener('resize', resizeCanvas);
+            };
+
+            setupStarfield();
+            setupSimulator();
+        });
+    </script>
+</body>
+</html>
