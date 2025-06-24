@@ -163,9 +163,8 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const setupStarfield = () => { /* ...código omitido para brevidade... */ };
+            const setupStarfield = () => { /* ...código omitido... */ };
             
-            // SCRIPT DO GRÁFICO CORRIGIDO
             const setupPropertiesChart = () => {
                 const ctx = document.getElementById('propertiesChart');
                 if (!ctx) return;
@@ -183,22 +182,10 @@
                 const chartDatasets = dataSets.map(ds => ({ label: ds.label, data: ds.data, backgroundColor: ds.bgColor, borderColor: ds.borderColor, borderWidth: 2, }));
                 new Chart(ctx, {
                     type: 'radar',
-                    data: {
-                        labels: ['Massa', 'Raio', 'Gravidade', 'Densidade'],
-                        datasets: chartDatasets
-                    },
+                    data: { labels: ['Massa', 'Raio', 'Gravidade', 'Densidade'], datasets: chartDatasets },
                     options: {
                         maintainAspectRatio: false,
-                        scales: {
-                            r: {
-                                angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
-                                grid: { color: 'rgba(255, 255, 255, 0.2)' },
-                                pointLabels: { color: '#e2e8f0', font: { size: 14 } },
-                                ticks: { color: '#e2e8f0', backdropColor: 'transparent', stepSize: 20, font: {size: 10} },
-                                suggestedMin: 0,
-                                suggestedMax: 100
-                            }
-                        },
+                        scales: { r: { angleLines: { color: 'rgba(255, 255, 255, 0.2)' }, grid: { color: 'rgba(255, 255, 255, 0.2)' }, pointLabels: { color: '#e2e8f0', font: { size: 14 } }, ticks: { color: '#e2e8f0', backdropColor: 'transparent', stepSize: 20, font: {size: 10} }, suggestedMin: 0, suggestedMax: 100 } },
                         plugins: {
                             legend: { labels: { color: '#e2e8f0' } },
                             tooltip: {
@@ -215,7 +202,7 @@
                                             "Anã Branca (Sirius B)": ["~0.7 M☉", "~6,000 km", "~10⁵ g", "~10⁹ kg/m³"],
                                             "Estrela de Nêutrons (PSR J0348+0432)": ["~1.4 M☉", "~12 km", "~2x10¹¹ g", "~10¹⁷ kg/m³"],
                                             "Buraco Negro Estelar (Cygnus X-1)": ["~15 M☉", "~45 km (Rsch)", ">10¹² g", ">10¹⁸ kg/m³"],
-                                            "Buraco Negro Supermassivo (Sgr A*)": ["~4x10⁶ M☉", "~12x10⁶ km (Rsch)", ">10¹⁸ g", ">10¹⁸ kg/m³"]
+                                            "Buraco Negro Supermassivo (Sgr A*)": ["~4x10⁶ M☉", "~12x10⁶ km (Rsch)", ">10¹⁸ kg/m³"]
                                         };
                                         label += originalValues[context.dataset.label][context.dataIndex];
                                         return label;
@@ -227,7 +214,20 @@
                 });
             };
 
-            const toggleFullscreen = () => { /* ...código omitido... */ };
+            // FUNÇÃO DO BOTÃO DE TELA CHEIA REINCORPORADA
+            const toggleFullscreen = () => {
+                const btn = document.getElementById('fullscreen-btn');
+                if(!btn) return;
+                btn.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            alert(`Erro ao tentar ativar o modo tela cheia: ${err.message}`);
+                        });
+                    } else {
+                        document.exitFullscreen();
+                    }
+                });
+            };
 
             setupStarfield();
             setupPropertiesChart();
