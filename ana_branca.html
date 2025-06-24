@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anãs Brancas: Diamantes no Céu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .glass-effect { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.3); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl md:text-2xl font-bold text-blue-300">Anãs Brancas</h1>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#formation" class="text-slate-300 hover:text-blue-300 transition-colors">Formação</a>
+                    <a href="#sirius-b" class="text-slate-300 hover:text-blue-300 transition-colors">Sirius B</a>
+                    <a href="#fate" class="text-slate-300 hover:text-blue-300 transition-colors">Destino Final</a>
+                    <a href="#simulator" class="text-slate-300 hover:text-blue-300 transition-colors">Simulador</a>
+                    <a href="index.html" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600 transition-colors font-semibold">Voltar</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="relative py-20 sm:py-32 text-center overflow-hidden">
+            <canvas id="starfield-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">O Destino Brilhante da Maioria das Estrelas</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">Uma anã branca é o núcleo denso e quente que resta após uma estrela de massa baixa ou média, como o Sol, esgotar seu combustível nuclear. São "brasas" estelares que esfriam lentamente ao longo de eras.</p>
+            </div>
+        </section>
+
+        <section id="formation" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Nascimento em uma Nebulosa Planetária</h2>
+                    <p class="mt-4 text-lg text-slate-400">A anã branca é revelada após a estrela-mãe ejetar suas camadas externas para o espaço.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-slate-300 space-y-4 text-base">
+                        <p><strong class="font-semibold text-blue-300">O Fim da Gigante Vermelha:</strong> Após a fase de gigante vermelha, a estrela não tem mais massa para fundir elementos mais pesados que carbono e oxigênio em seu núcleo. As pulsações finais se tornam tão fortes que expelem toda a atmosfera da estrela.</p>
+                        <p><strong class="font-semibold text-blue-300">A Beleza da Nebulosa:</strong> Essas camadas de gás expelidas se expandem e são ionizadas pela radiação ultravioleta do núcleo quente e exposto, criando uma estrutura brilhante e colorida chamada de nebulosa planetária. Elas são alguns dos objetos mais bonitos do céu noturno.</p>
+                        <p><strong class="font-semibold text-blue-300">O Núcleo Exposto:</strong> O que resta no centro é a anã branca: um objeto incrivelmente quente, do tamanho da Terra, mas com uma massa próxima à do Sol. Ela brilha intensamente não por fusão, mas pelo calor residual de sua vida passada.</p>
+                    </div>
+                    <div class="flex justify-center items-center p-8">
+                         <div class="relative w-72 h-72 flex items-center justify-center">
+                            <div class="absolute w-full h-full rounded-full bg-pink-500/20 blur-2xl"></div>
+                            <div class="absolute w-2/3 h-2/3 rounded-full bg-sky-500/20 blur-xl"></div>
+                            <div class="w-4 h-4 rounded-full bg-white shadow-2xl shadow-white"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="sirius-b" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold">
+                        <a href="https://en.wikipedia.org/wiki/Sirius#Sirius_B" target="_blank" rel="noopener noreferrer" class="text-white hover:text-blue-300 hover:underline transition-colors">
+                            Estudo de Caso: Sirius B
+                        </a>
+                    </h2>
+                    <p class="mt-4 text-lg text-slate-400">A companheira anã branca da estrela mais brilhante do nosso céu, Sirius A.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-blue-300 font-bold text-xl">Densidade</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~10⁹ kg/m³</p>
+                        <p class="text-slate-400 mt-2">Uma colher de chá pesaria toneladas</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-blue-300 font-bold text-xl">Massa</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~1.02 M☉</p>
+                        <p class="text-slate-400 mt-2">A massa do Sol em um volume planetário</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-blue-300 font-bold text-xl">Diâmetro</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~12,000 km</p>
+                        <p class="text-slate-400 mt-2">Ligeiramente menor que a Terra</p>
+                    </div>
+                     <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-blue-300 font-bold text-xl">Temperatura</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~25,000 °C</p>
+                        <p class="text-slate-400 mt-2">Extremamente quente e energética</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fate" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-white">Um Diamante no Céu</h2>
+                <p class="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">Uma anã branca não tem fonte de energia interna. Ela passa o resto de sua existência irradiando seu calor para o espaço. Ao longo de bilhões e trilhões de anos, ela esfria e sua matéria, composta principalmente de carbono e oxigênio, começa a se <strong class="text-gray-300">cristalizar</strong>. O destino final de uma anã branca é se tornar uma <strong class="text-gray-500">anã negra</strong>, um "diamante" frio e escuro do tamanho da Terra, vagando pelo universo.</p>
+            </div>
+        </section>
+        
+        <section id="simulator" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Simulador da Anã Branca</h2>
+                    <p class="mt-4 text-lg text-slate-400">Explore o nascimento e a física destes remanescentes estelares.</p>
+                </div>
+                <div class="w-full max-w-4xl mx-auto aspect-video glass-effect rounded-lg overflow-hidden">
+                    <canvas id="simulator-canvas"></canvas>
+                </div>
+                <div class="flex justify-center flex-wrap gap-4 mt-8">
+                    <button id="sim-nebula" class="bg-blue-500 text-white px-5 py-2.5 rounded-md hover:bg-blue-600 transition-colors font-semibold">Criar Nebulosa</button>
+                    <button id="sim-lensing" class="bg-blue-500 text-white px-5 py-2.5 rounded-md hover:bg-blue-600 transition-colors font-semibold">Lente Gravitacional</button>
+                    <button id="sim-reset" class="bg-slate-600 text-white px-5 py-2.5 rounded-md hover:bg-slate-700 transition-colors font-semibold">Resetar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const setupStarfield = () => { /* ...código omitido por brevidade... */ };
+            
+            const setupSimulator = () => {
+                const canvas = document.getElementById('simulator-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let state = { mode: 'idle', frame: 0 };
+                let particles, backgroundStars, whiteDwarf;
+                let isDragging = false;
+
+                const resizeCanvas = () => { if(canvas) { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; }};
+                
+                const reset = (mode = 'idle') => {
+                    state.mode = mode;
+                    state.frame = 0;
+                    particles = [];
+                    backgroundStars = [];
+                    whiteDwarf = { x: canvas.width / 2, y: canvas.height / 2, radius: 10, mass: 2000 };
+
+                    if (mode === 'nebula') {
+                        for (let i = 0; i < 300; i++) {
+                            const angle = Math.random() * 2 * Math.PI;
+                            const speed = Math.random() * 0.5 + 0.1;
+                            particles.push({
+                                x: canvas.width/2, y: canvas.height/2,
+                                vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+                                life: 500, maxLife: 500,
+                                color: `hsl(${Math.random() * 360}, 80%, 70%)`
+                            });
+                        }
+                    } else if (mode === 'lensing') {
+                         for (let i = 0; i < 100; i++) {
+                             backgroundStars.push({x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5});
+                         }
+                    }
+                };
+                
+                const draw = () => {
+                    if(!canvas) return;
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    ctx.clearRect(0,0,canvas.width, canvas.height);
+
+                    if (state.mode === 'nebula') {
+                        particles.forEach((p, i) => {
+                            p.x += p.vx; p.y += p.vy; p.life--;
+                            if (p.life <= 0) particles.splice(i, 1);
+                            ctx.fillStyle = p.color;
+                            ctx.globalAlpha = p.life / p.maxLife * 0.5;
+                            ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI); ctx.fill();
+                        });
+                        ctx.globalAlpha = 1;
+                        
+                        ctx.fillStyle = 'white'; ctx.shadowColor = 'white'; ctx.shadowBlur = 20;
+                        ctx.beginPath(); ctx.arc(centerX, centerY, 5, 0, 2 * Math.PI); ctx.fill();
+                        ctx.shadowBlur = 0;
+
+                    } else if (state.mode === 'lensing') {
+                        backgroundStars.forEach(s => {
+                            const dx = s.x - whiteDwarf.x;
+                            const dy = s.y - whiteDwarf.y;
+                            const distSq = dx*dx + dy*dy;
+                            if (distSq < 1) return;
+                            
+                            const offset = whiteDwarf.mass / distSq;
+                            const drawX = s.x + offset * dx / Math.sqrt(distSq);
+                            const drawY = s.y + offset * dy / Math.sqrt(distSq);
+
+                            ctx.fillStyle = 'white';
+                            ctx.beginPath(); ctx.arc(drawX, drawY, s.radius, 0, 2*Math.PI); ctx.fill();
+                        });
+
+                        ctx.fillStyle = '#a7f3d0'; ctx.shadowColor = '#a7f3d0'; ctx.shadowBlur = 10;
+                        ctx.beginPath(); ctx.arc(whiteDwarf.x, whiteDwarf.y, whiteDwarf.radius, 0, 2*Math.PI); ctx.fill();
+                        ctx.shadowBlur = 0;
+                    }
+                    else {
+                        ctx.fillStyle = 'rgba(226, 232, 240, 0.8)'; ctx.font = '20px Inter'; ctx.textAlign = 'center';
+                        ctx.fillText('Selecione uma simulação acima.', centerX, centerY);
+                    }
+                    state.frame++;
+                    requestAnimationFrame(draw);
+                };
+                
+                document.getElementById('sim-nebula').onclick = () => reset('nebula');
+                document.getElementById('sim-lensing').onclick = () => reset('lensing');
+                document.getElementById('sim-reset').onclick = () => reset('idle');
+
+                canvas.addEventListener('mousedown', (e) => { if(state.mode === 'lensing') { isDragging = true; }});
+                canvas.addEventListener('mouseup', () => { isDragging = false; });
+                canvas.addEventListener('mousemove', (e) => {
+                    if (isDragging && state.mode === 'lensing') {
+                        const rect = canvas.getBoundingClientRect();
+                        whiteDwarf.x = e.clientX - rect.left;
+                        whiteDwarf.y = e.clientY - rect.top;
+                    }
+                });
+                
+                window.addEventListener('load', () => { resizeCanvas(); reset('idle'); draw(); });
+                window.addEventListener('resize', resizeCanvas);
+            };
+
+            // O código de setupStarfield foi omitido aqui, mas deve ser mantido no seu arquivo.
+            setupStarfield();
+            setupSimulator();
+        });
+    </script>
+</body>
+</html>
