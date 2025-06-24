@@ -10,41 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #e2e8f0;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 50vh;
-            max-height: 550px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 60vh;
-                max-height: 650px;
-            }
-        }
-        .glass-effect {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(51, 65, 85, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .glass-effect:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        .glass-effect a {
-            text-decoration: none;
-            color: inherit;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 50vh; max-height: 550px; }
+        @media (min-width: 768px) { .chart-container { height: 60vh; max-height: 650px; } }
+        .glass-effect { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.3); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .glass-effect:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+        .glass-effect a { text-decoration: none; color: inherit; }
+        .timeline-item { position: relative; padding-left: 30px; border-left: 2px solid #334155; }
+        .timeline-item::before { content: ''; position: absolute; left: -9px; top: 0; width: 16px; height: 16px; border-radius: 50%; background-color: #0f172a; border: 2px solid #3b82f6; }
     </style>
 </head>
 <body class="antialiased">
@@ -54,13 +27,12 @@
             <div class="flex items-center justify-between h-16">
                 <h1 class="text-xl md:text-2xl font-bold text-sky-400">Jornada Estelar</h1>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#intro" class="text-slate-300 hover:text-sky-400 transition-colors">Início</a>
                     <a href="#stellar-types" class="text-slate-300 hover:text-sky-400 transition-colors">Tipos Estelares</a>
-                    <a href="#properties" class="text-slate-300 hover:text-sky-400 transition-colors">Propriedades</a>
-                    <a href="#simulations" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600 transition-colors font-semibold">Simulações</a>
+                    <a href="#timeline" class="text-slate-300 hover:text-sky-400 transition-colors">Linha do Tempo</a>
+                    <a href="#gallery" class="text-slate-300 hover:text-sky-400 transition-colors">Galeria</a>
+                    <a href="#glossary" class="text-slate-300 hover:text-sky-400 transition-colors">Glossário</a>
                 </div>
-                <button id="fullscreen-btn" class="ml-4 p-2 rounded-md bg-slate-700 text-white hover:bg-slate-600 transition-colors hidden md:block" title="Tela Cheia">
-                    &#x26F6; </button>
+                <button id="fullscreen-btn" class="ml-4 p-2 rounded-md bg-slate-700 text-white hover:bg-slate-600 transition-colors hidden md:block" title="Tela Cheia">&#x26F6;</button>
             </div>
         </nav>
     </header>
@@ -70,7 +42,7 @@
             <canvas id="starfield-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Uma Jornada Pelas Possibilidades Cósmicas</h2>
-                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">Explore o fascinante ciclo de vida das estrelas, desde os objetos mais discretos como as anãs marrons até os colossais buracos negros supermassivos. Este site interativo desvenda os segredos do universo através de visualizações e simulações.</p>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">Explore o fascinante ciclo de vida das estrelas, desde as nuvens de gás primordiais até os enigmáticos buracos negros. Este portal interativo desvenda os segredos do universo através de conteúdo detalhado e visualizações.</p>
             </div>
         </section>
 
@@ -78,113 +50,91 @@
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold text-white">Conheça os Gigantes e Anões do Cosmos</h2>
-                    <p class="mt-4 text-lg text-slate-400">Das menores e mais frias às maiores e mais densas, cada tipo estelar tem uma história única no universo.</p>
+                    <p class="mt-4 text-lg text-slate-400">Clique em um card para explorar em detalhes cada fase da evolução estelar.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                    <div class="glass-effect p-6 rounded-lg text-center">
-                       <a href="ana_marrom.html" class="block glass-effect p-6 rounded-lg text-center">
-                          <h3 class="text-amber-400 font-bold text-xl">Anã Marrom</h3>
-                          <p class="text-slate-300 mt-3 text-sm">Objetos subestelares que não possuem massa suficiente para iniciar a fusão sustentada de hidrogênio em seus núcleos. São estrelas "fracassadas" que brilham fracamente.</p>
-                          <p class="text-slate-400 mt-2 text-xs">Exemplo: WISE 0855−0714</p>
-                       </a>
-                    </div>
-
-                    <div class="glass-effect p-6 rounded-lg text-center">
-                        <a href="ana_vermelha.html" class="block glass-effect p-6 rounded-lg text-center">
-                            <h3 class="text-red-400 font-bold text-xl">Anã Vermelha</h3>
-                            <p class="text-slate-300 mt-3 text-sm">As estrelas mais comuns e de vida mais longa no universo. Queimam hidrogênio lentamente e podem viver por trilhões de anos.</p>
-                            <p class="text-slate-400 mt-2 text-xs">Exemplo: Proxima Centauri</p>
-                        </a>
-                    </div>
-
-                    <div class="glass-effect p-6 rounded-lg text-center">
-                        <a href="estrela_tipo_sol.html" class="block glass-effect p-6 rounded-lg text-center">
-                            <h3 class="text-yellow-300 font-bold text-xl">Estrela Tipo Sol</h3>
-                            <p class="text-slate-300 mt-3 text-sm">Estrelas de sequência principal de massa intermediária, como o nosso Sol. Passam a maior parte de suas vidas convertendo hidrogênio em hélio.</p>
-                            <p class="text-slate-400 mt-2 text-xs">Exemplo: Sol</p>
-                        </a>
-                    </div>
-
-                    <div class="glass-effect p-6 rounded-lg text-center">
-                        <a href="gigante_vermelha.html" class="block glass-effect p-6 rounded-lg text-center">
-                            <h3 class="text-orange-400 font-bold text-xl">Gigante Vermelha</h3>
-                            <p class="text-slate-300 mt-3 text-sm">Estágio evolutivo de estrelas de massa intermediária após esgotarem o hidrogênio do núcleo. Elas se expandem e esfriam, ficando avermelhadas e muito maiores.</p>
-                            <p class="text-slate-400 mt-2 text-xs">Exemplo: Arcturus</p>
-                        </a>
-                    </div>
-
-                    <div class="glass-effect p-6 rounded-lg text-center">
-                       <a href="supergigante_vermelha.html" class="block glass-effect p-6 rounded-lg text-center">
-                            <h3 class="text-red-500 font-bold text-xl">Supergigante Vermelha</h3>
-                            <p class="text-slate-300 mt-3 text-sm">As maiores estrelas em termos de volume. São estrelas massivas no estágio final de suas vidas, à beira de uma supernova.</p>
-                            <p class="text-slate-400 mt-2 text-xs">Exemplo: Betelgeuse</p>
-                       </a>
-                    </div>
-
-                    <div class="glass-effect p-6 rounded-lg text-center">
-                        <a href="ana_branca.html" class="block glass-effect p-6 rounded-lg text-center">
-                            <h3 class="text-blue-300 font-bold text-xl">Anã Branca</h3>
-                            <p class="text-slate-300 mt-3 text-sm">O denso núcleo remanescente de uma estrela de massa baixa a média, como o Sol, após ejetar suas camadas externas em uma nebulosa planetária. Não há mais fusão nuclear.</p>
-                            <p class="text-slate-400 mt-2 text-xs">Exemplo: Sirius B</p>
-                        </a>
-                    </div>
-
-                    <div class="glass-effect p-6 rounded-lg text-center">
-                        <a href="estrela_de_neutrons.html" class="block glass-effect p-6 rounded-lg text-center">
-                            <h3 class="text-sky-400 font-bold text-xl">Estrela de Nêutrons</h3>
-                            <p class="text-slate-300 mt-3 text-sm">Remanescente extremamente denso de uma estrela massiva que explodiu como supernova. Composta principalmente por nêutrons degenerados.</p>
-                            <p class="text-slate-400 mt-2 text-xs">Exemplo: PSR J0348+0432</p>
-                        </a>
-                    </div>
-
-                    <div class="glass-effect p-6 rounded-lg text-center">
-                        <a href="buraco_negro_estelar.html" class="block glass-effect p-6 rounded-lg text-center">
-                            <h3 class="text-gray-600 font-bold text-xl">Buraco Negro Estelar</h3>
-                            <p class="text-slate-300 mt-3 text-sm">Formado a partir do colapso gravitacional de estrelas muito massivas. Possui uma atração gravitacional tão forte que nada, nem mesmo a luz, pode escapar de seu horizonte de eventos.</p>
-                            <p class="text-slate-400 mt-2 text-xs">Exemplo: Cygnus X-1</p>
-                        </a>
-                    </div>
-
-                    <div class="glass-effect p-6 rounded-lg text-center">
-                       <a href="buraco_negro_supermassivo.html" class="block glass-effect p-6 rounded-lg text-center">
-                            <h3 class="text-purple-600 font-bold text-xl">Buraco Negro Supermassivo</h3>
-                            <p class="text-slate-300 mt-3 text-sm">Encontrados nos centros da maioria das galáxias. Podem ter milhões ou bilhões de vezes a massa do Sol, influenciando a evolução galáctica.</p>
-                            <p class="text-slate-400 mt-2 text-xs">Exemplo: Sagitário A*</p>
-                        </a>
-                    </div>
+                    <a href="ana_marrom.html" class="block glass-effect p-6 rounded-lg text-center"><h3 class="text-amber-400 font-bold text-xl">Anã Marrom</h3><p class="text-slate-300 mt-3 text-sm">Objetos subestelares que não possuem massa suficiente para iniciar a fusão sustentada de hidrogênio em seus núcleos.</p><p class="text-slate-400 mt-2 text-xs">Exemplo: WISE 0855−0714</p></a>
+                    <a href="ana_vermelha.html" class="block glass-effect p-6 rounded-lg text-center"><h3 class="text-red-400 font-bold text-xl">Anã Vermelha</h3><p class="text-slate-300 mt-3 text-sm">As estrelas mais comuns e de vida mais longa no universo, queimando seu combustível lentamente por trilhões de anos.</p><p class="text-slate-400 mt-2 text-xs">Exemplo: Proxima Centauri</p></a>
+                    <a href="estrela_tipo_sol.html" class="block glass-effect p-6 rounded-lg text-center"><h3 class="text-yellow-300 font-bold text-xl">Estrela Tipo Sol</h3><p class="text-slate-300 mt-3 text-sm">Estrelas de sequência principal de massa intermediária, como o nosso Sol, que vivem por bilhões de anos.</p><p class="text-slate-400 mt-2 text-xs">Exemplo: Sol</p></a>
+                    <a href="gigante_vermelha.html" class="block glass-effect p-6 rounded-lg text-center"><h3 class="text-orange-400 font-bold text-xl">Gigante Vermelha</h3><p class="text-slate-300 mt-3 text-sm">Estágio evolutivo de estrelas de massa intermediária que se expandem e esfriam drasticamente.</p><p class="text-slate-400 mt-2 text-xs">Exemplo: Arcturus</p></a>
+                    <a href="supergigante_vermelha.html" class="block glass-effect p-6 rounded-lg text-center"><h3 class="text-red-500 font-bold text-xl">Supergigante Vermelha</h3><p class="text-slate-300 mt-3 text-sm">As maiores estrelas em volume, vivendo os últimos momentos antes de uma explosão de supernova.</p><p class="text-slate-400 mt-2 text-xs">Exemplo: Betelgeuse</p></a>
+                    <a href="ana_branca.html" class="block glass-effect p-6 rounded-lg text-center"><h3 class="text-blue-300 font-bold text-xl">Anã Branca</h3><p class="text-slate-300 mt-3 text-sm">O denso núcleo remanescente de uma estrela de baixa massa, que esfria lentamente por eras.</p><p class="text-slate-400 mt-2 text-xs">Exemplo: Sirius B</p></a>
+                    <a href="estrela_de_neutrons.html" class="block glass-effect p-6 rounded-lg text-center"><h3 class="text-sky-400 font-bold text-xl">Estrela de Nêutrons</h3><p class="text-slate-300 mt-3 text-sm">Remanescente extremamente denso de uma supernova, com a massa do Sol em uma esfera do tamanho de uma cidade.</p><p class="text-slate-400 mt-2 text-xs">Exemplo: PSR J0348+0432</p></a>
+                    <a href="buraco_negro_estelar.html" class="block glass-effect p-6 rounded-lg text-center"><h3 class="text-gray-600 font-bold text-xl">Buraco Negro Estelar</h3><p class="text-slate-300 mt-3 text-sm">Formado a partir do colapso de estrelas muito massivas, com uma gravidade da qual nem a luz escapa.</p><p class="text-slate-400 mt-2 text-xs">Exemplo: Cygnus X-1</p></a>
+                    <a href="buraco_negro_supermassivo.html" class="block glass-effect p-6 rounded-lg text-center"><h3 class="text-purple-600 font-bold text-xl">Buraco Negro Supermassivo</h3><p class="text-slate-300 mt-3 text-sm">Os gigantes que residem no centro das galáxias, governando a sua evolução.</p><p class="text-slate-400 mt-2 text-xs">Exemplo: Sagitário A*</p></a>
                 </div>
             </div>
         </section>
 
-        <section id="properties" class="py-20 sm:py-24">
+        <section id="timeline" class="py-20 sm:py-24">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-3xl font-bold text-white">Propriedades Comparadas</h2>
-                    <p class="mt-4 text-lg text-slate-400">Explore as propriedades físicas extremas dos diferentes objetos celestes. Clique nos nomes dos objetos celestiais para ocultá-los.</p>
+                    <h2 class="text-3xl font-bold text-white">Linha do Tempo da Evolução Estelar</h2>
+                    <p class="mt-4 text-lg text-slate-400">Siga a jornada de uma nuvem de gás até seu destino final.</p>
                 </div>
-                <div class="chart-container">
-                    <canvas id="propertiesChart"></canvas>
+                <div class="max-w-4xl mx-auto">
+                    <div class="timeline-item pb-10">
+                        <h3 class="text-xl font-semibold text-purple-300">Nuvem Molecular</h3>
+                        <p class="text-slate-400 mt-1">O berço das estrelas. Vastas nuvens de gás e poeira que colapsam sob sua própria gravidade.</p>
+                    </div>
+                    <div class="timeline-item pb-10">
+                        <h3 class="text-xl font-semibold text-yellow-200">Protoestrela</h3>
+                        <p class="text-slate-400 mt-1">O núcleo denso e quente que se forma no centro da nuvem em colapso, antes do início da fusão nuclear.</p>
+                    </div>
+                    <div class="timeline-item pb-4">
+                        <h3 class="text-xl font-semibold text-white">Sequência Principal</h3>
+                        <p class="text-slate-400 mt-1">A "vida adulta" de uma estrela, onde ela funde hidrogênio em hélio. Aqui, o caminho se divide.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-x-8 pl-8">
+                        <div>
+                            <p class="font-semibold text-yellow-300 mt-4 mb-4 border-t border-b border-yellow-300/30 py-2">Caminho do Sol</p>
+                            <div class="timeline-item pb-10"><h3 class="text-xl font-semibold text-orange-400">Gigante Vermelha</h3><p class="text-slate-400 mt-1">A estrela se expande e esfria após esgotar o hidrogênio do núcleo.</p></div>
+                            <div class="timeline-item pb-10"><h3 class="text-xl font-semibold text-pink-400">Nebulosa Planetária</h3><p class="text-slate-400 mt-1">As camadas externas são ejetadas, criando uma concha de gás brilhante.</p></div>
+                            <div class="timeline-item"><h3 class="text-xl font-semibold text-blue-300">Anã Branca</h3><p class="text-slate-400 mt-1">O núcleo quente e denso que resta, esfriando lentamente por eras.</p></div>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-red-500 mt-4 mb-4 border-t border-b border-red-500/30 py-2">Caminho das Estrelas Massivas</p>
+                            <div class="timeline-item pb-10"><h3 class="text-xl font-semibold text-red-500">Supergigante Vermelha</h3><p class="text-slate-400 mt-1">Semelhante a uma gigante vermelha, mas em uma escala muito maior e mais instável.</p></div>
+                            <div class="timeline-item pb-10"><h3 class="text-xl font-semibold text-amber-400">Supernova</h3><p class="text-slate-400 mt-1">Uma explosão cataclísmica que forja elementos pesados e ofusca galáxias.</p></div>
+                            <div class="timeline-item"><h3 class="text-xl font-semibold text-sky-400">Estrela de Nêutrons ou <span class="text-gray-400">Buraco Negro</span></h3><p class="text-slate-400 mt-1">O destino final depende da massa do núcleo remanescente.</p></div>
+                        </div>
+                    </div>
                 </div>
-                 <p class="text-center text-slate-500 mt-4 text-sm">Comparação das propriedades físicas (Massa, Raio, Gravidade, Densidade). Os valores são normalizados para visualização no gráfico, mas os valores reais estão nos detalhes que aparecem ao passar o mouse.</p>
             </div>
         </section>
 
-        <section id="simulations" class="py-20 sm:py-24 bg-slate-950">
+        <section id="gallery" class="py-20 sm:py-24 bg-slate-950">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-white">Simulações Interativas</h2>
-                    <p class="mt-4 text-lg text-slate-400">Visualize processos cósmicos que não são facilmente simulados. Clique nos botões para acionar eventos.</p>
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-white">Galeria do Cosmos</h2>
+                    <p class="mt-4 text-lg text-slate-400">Veja a beleza real do universo capturada por nossos telescópios.</p>
                 </div>
-                <div class="w-full max-w-4xl mx-auto aspect-video glass-effect rounded-lg overflow-hidden">
-                    <canvas id="simulator-canvas"></canvas>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="space-y-4"><img src="imagens/Ring_Nebula.jpg" alt="A Nebulosa do Anel" class="rounded-lg object-cover h-64 w-full"><p class="text-center text-sm text-slate-400">A Nebulosa do Anel, uma nebulosa planetária clássica.</p></div>
+                    <div class="space-y-4"><img src="imagens/primeira_img_buraco_negro.jpg" alt="Sombra do buraco negro M87*" class="rounded-lg object-cover h-64 w-full"><p class="text-center text-sm text-slate-400">A primeira imagem da sombra de um buraco negro (M87*).</p></div>
+                    <div class="space-y-4"><img src="imagens/nebulosa_helice.webp" alt="A Nebulosa da Hélice" class="rounded-lg object-cover h-64 w-full"><p class="text-center text-sm text-slate-400">A Nebulosa da Hélice, o "Olho de Deus".</p></div>
+                    <div class="space-y-4"><img src="imagens/betelgeuse.webp" alt="Betelgeuse ejetando sua superfície" class="rounded-lg object-cover h-64 w-full"><p class="text-center text-sm text-slate-400">A supergigante Betelgeuse ejetando sua superfície.</p></div>
+                    <div class="space-y-4"><img src="imagens/nebulosa_caranguejo.jpg" alt="A Nebulosa do Caranguejo" class="rounded-lg object-cover h-64 w-full"><p class="text-center text-sm text-slate-400">A Nebulosa do Caranguejo, remanescente de uma supernova.</p></div>
+                    <div class="space-y-4"><img src="imagens/cygnus_X1.jpg" alt="Cygnus X-1" class="rounded-lg object-cover h-64 w-full"><p class="text-center text-sm text-slate-400">Concepção artística de Cygnus X-1 e sua estrela companheira.</p></div>
                 </div>
-                <div class="flex justify-center flex-wrap gap-4 mt-8">
-                    <button id="sim-sun-evolution" class="bg-purple-500 text-white px-5 py-2.5 rounded-md hover:bg-purple-600 transition-colors font-semibold">Evolução do Sol</button>
-                    <button id="sim-supernova" class="bg-amber-500 text-white px-5 py-2.5 rounded-md hover:bg-amber-600 transition-colors font-semibold">Simular Supernova</button>
-                    <button id="sim-gravity" class="bg-sky-500 text-white px-5 py-2.5 rounded-md hover:bg-sky-600 transition-colors font-semibold">Testar Gravidade</button>
-                    <button id="sim-bh-accretion" class="bg-gray-700 text-white px-5 py-2.5 rounded-md hover:bg-gray-800 transition-colors font-semibold">Buraco Negro: Acreção</button>
-                    <button id="sim-reset" class="bg-slate-600 text-white px-5 py-2.5 rounded-md hover:bg-slate-700 transition-colors font-semibold">Resetar</button>
+            </div>
+        </section>
+
+        <section id="glossary" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-white">Glossário Astronômico</h2>
+                    <p class="mt-4 text-lg text-slate-400">Desvende os termos chave da nossa jornada estelar.</p>
+                </div>
+                <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-x-8 gap-y-6 text-slate-300">
+                    <div><strong class="font-semibold text-white">Fusão Nuclear:</strong> O processo que alimenta as estrelas, onde núcleos atômicos leves se combinam para formar núcleos mais pesados, liberando energia.</div>
+                    <div><strong class="font-semibold text-white">Sequência Principal:</strong> A fase mais longa da vida de uma estrela, durante a qual ela funde hidrogênio em hélio em seu núcleo.</div>
+                    <div><strong class="font-semibold text-white">Supernova:</strong> A explosão cataclísmica de uma estrela massiva no final de sua vida, resultando em um brilho que pode ofuscar uma galáxia inteira.</div>
+                    <div><strong class="font-semibold text-white">Kilonova:</strong> Uma explosão imensa, cerca de 1000 vezes mais brilhante que uma nova clássica, que ocorre na fusão de duas estrelas de nêutrons ou de uma estrela de nêutrons e um buraco negro.</div>
+                    <div><strong class="font-semibold text-white">Singularidade:</strong> O ponto central de um buraco negro, onde a matéria é comprimida a uma densidade teoricamente infinita.</div>
+                    <div><strong class="font-semibold text-white">Horizonte de Eventos:</strong> A fronteira ao redor de um buraco negro a partir da qual nada, nem mesmo a luz, pode escapar.</div>
+                    <div><strong class="font-semibold text-white">Disco de Acréscimo:</strong> Um disco de gás, poeira e detritos estelares que se forma ao redor de objetos massivos, como buracos negros, aquecendo-se e brilhando intensamente devido ao atrito.</div>
+                    <div><strong class="font-semibold text-white">Nebulosa Planetária:</strong> A concha de gás brilhante e em expansão ejetada por uma estrela de baixa massa em seus estágios finais de vida.</div>
                 </div>
             </div>
         </section>
@@ -199,413 +149,34 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
             const setupStarfield = () => {
                 const canvas = document.getElementById('starfield-canvas');
                 if (!canvas) return;
                 const ctx = canvas.getContext('2d');
-                let stars = [];
-                const numStars = 200;
-
-                const resizeCanvas = () => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = canvas.parentElement.offsetHeight;
-                };
-
-                const createStars = () => {
-                    stars = [];
-                    for (let i = 0; i < numStars; i++) {
-                        stars.push({
-                            x: Math.random() * canvas.width,
-                            y: Math.random() * canvas.height,
-                            radius: Math.random() * 1.5,
-                            alpha: Math.random(),
-                            dAlpha: Math.random() * 0.01 - 0.005
-                        });
-                    }
-                };
-                
-                const animate = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-                    stars.forEach(star => {
-                        star.alpha += star.dAlpha;
-                        if (star.alpha <= 0 || star.alpha >= 1) {
-                            star.dAlpha *= -1;
-                        }
-                        ctx.globalAlpha = star.alpha;
-                        ctx.beginPath();
-                        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                        ctx.fill();
-                    });
-                    requestAnimationFrame(animate);
-                };
-
-                window.addEventListener('resize', () => {
-                    resizeCanvas();
-                    createStars();
-                });
-
-                resizeCanvas();
-                createStars();
-                animate();
-            };
-
-            const setupPropertiesChart = () => {
-                const ctx = document.getElementById('propertiesChart');
-                if (!ctx) return;
-
-                const dataSets = [
-                    { label: 'Anã Marrom (WISE 0855−0714)', data: [5, 10, 20, 10], bgColor: 'rgba(245, 158, 11, 0.2)', borderColor: 'rgba(245, 158, 11, 1)' },
-                    { label: 'Anã Vermelha (Proxima Centauri)', data: [10, 15, 15, 10], bgColor: 'rgba(239, 68, 68, 0.2)', borderColor: 'rgba(239, 68, 68, 1)' },
-                    { label: 'Estrela Tipo Sol (Sol)', data: [20, 25, 10, 5], bgColor: 'rgba(253, 224, 71, 0.2)', borderColor: 'rgba(253, 224, 71, 1)' },
-                    { label: 'Gigante Vermelha (Arcturus)', data: [30, 70, 1, 1], bgColor: 'rgba(249, 115, 22, 0.2)', borderColor: 'rgba(249, 115, 22, 1)' },
-                    { label: 'Supergigante Vermelha (Betelgeuse)', data: [40, 100, 1, 1], bgColor: 'rgba(239, 68, 68, 0.2)', borderColor: 'rgba(239, 68, 68, 1)' },
-                    { label: 'Anã Branca (Sirius B)', data: [15, 5, 85, 90], bgColor: 'rgba(96, 165, 250, 0.2)', borderColor: 'rgba(96, 165, 250, 1)' },
-                    { label: 'Estrela de Nêutrons (PSR J0348+0432)', data: [25, 1, 100, 100], bgColor: 'rgba(56, 189, 248, 0.2)', borderColor: 'rgba(56, 189, 248, 1)' },
-                    { label: 'Buraco Negro Estelar (Cygnus X-1)', data: [35, 1, 100, 100], bgColor: 'rgba(55, 65, 81, 0.2)', borderColor: 'rgba(55, 65, 81, 1)' },
-                    { label: 'Buraco Negro Supermassivo (Sgr A*)', data: [100, 60, 100, 100], bgColor: 'rgba(147, 51, 234, 0.2)', borderColor: 'rgba(147, 51, 234, 1)' }
-                ];
-
-                const chartDatasets = dataSets.map(ds => ({
-                    label: ds.label,
-                    data: ds.data,
-                    backgroundColor: ds.bgColor,
-                    borderColor: ds.borderColor,
-                    borderWidth: 2,
-                }));
-
-                new Chart(ctx, {
-                    type: 'radar',
-                    data: {
-                        labels: ['Massa', 'Raio', 'Gravidade', 'Densidade'],
-                        datasets: chartDatasets
-                    },
-                    options: {
-                        maintainAspectRatio: false,
-                        scales: {
-                            r: {
-                                angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
-                                grid: { color: 'rgba(255, 255, 255, 0.2)' },
-                                pointLabels: { 
-                                    color: '#e2e8f0',
-                                    font: { size: 14 }
-                                },
-                                ticks: {
-                                    color: '#e2e8f0',
-                                    backdropColor: 'transparent',
-                                    stepSize: 20,
-                                    font: {size: 10}
-                                },
-                                suggestedMin: 0,
-                                suggestedMax: 100
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                labels: { color: '#e2e8f0' }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.dataset.label || '';
-                                        if (label) label += ': ';
-                                        const originalValues = {
-                                            "Anã Marrom (WISE 0855−0714)": ["~0.05 M☉", "~60,000 km", "~100 g", "~10⁴ kg/m³"],
-                                            "Anã Vermelha (Proxima Centauri)": ["~0.1 M☉", "~100,000 km", "~50 g", "~10⁴ kg/m³"],
-                                            "Estrela Tipo Sol (Sol)": ["1 M☉", "696,340 km", "27.9 g", "1,410 kg/m³"],
-                                            "Gigante Vermelha (Arcturus)": ["~5 M☉", "~20,000,000 km", "~0.0001 g", "~10⁻⁶ kg/m³"],
-                                            "Supergigante Vermelha (Betelgeuse)": ["~15 M☉", "~900,000,000 km", "~0.00001 g", "~10⁻⁷ kg/m³"],
-                                            "Anã Branca (Sirius B)": ["~0.7 M☉", "~6,000 km", "~10⁵ g", "~10⁹ kg/m³"],
-                                            "Estrela de Nêutrons (PSR J0348+0432)": ["~1.4 M☉", "~12 km", "~2x10¹¹ g", "~10¹⁷ kg/m³"],
-                                            "Buraco Negro Estelar (Cygnus X-1)": ["~15 M☉", "~45 km (Rsch)", ">10¹² g", ">10¹⁸ kg/m³"],
-                                            "Buraco Negro Supermassivo (Sgr A*)": ["~4x10⁶ M☉", "~12x10⁶ km (Rsch)", ">10¹⁸ g", ">10¹⁸ kg/m³"]
-                                        };
-                                        label += originalValues[context.dataset.label][context.dataIndex];
-                                        return label;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
+                let stars = []; const numStars = 200;
+                const resize = () => { if(canvas){canvas.width = window.innerWidth; canvas.height = canvas.parentElement.offsetHeight;} };
+                const create = () => { stars = []; if(canvas){for (let i = 0; i < numStars; i++) { stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 1.5, alpha: Math.random(), dAlpha: Math.random() * 0.01 - 0.005 }); }} };
+                const animate = () => { if(canvas){ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'; stars.forEach(star => { star.alpha += star.dAlpha; if (star.alpha <= 0 || star.alpha >= 1) star.dAlpha *= -1; ctx.globalAlpha = star.alpha; ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); ctx.fill(); });} requestAnimationFrame(animate); };
+                window.addEventListener('resize', resize);
+                resize(); create(); animate();
             };
             
-            const setupSimulator = () => {
-                const canvas = document.getElementById('simulator-canvas');
-                if (!canvas) return;
-                const ctx = canvas.getContext('2d');
-                let particles = [];
-                let state = { mode: 'idle', frame: 0, supernovaRemnant: null };
-                let gravityStar = null; 
-                let sunEvolutionData = { radius: 10, alpha: 1, type: 'main_sequence' };
-                let blackHole = null;
-                let accretionParticles = [];
-
-                const resizeCanvas = () => {
-                    canvas.width = canvas.parentElement.clientWidth;
-                    canvas.height = canvas.parentElement.clientHeight;
-                };
-                
-                const reset = () => {
-                    particles = [];
-                    state = { mode: 'idle', frame: 0, supernovaRemnant: null };
-                    gravityStar = null;
-                    sunEvolutionData = { radius: 10, alpha: 1, type: 'main_sequence' };
-                    blackHole = null;
-                    accretionParticles = [];
-                };
-                
-                const createParticle = (x, y, vx, vy, life, type = 'debris', color = '#e2e8f0') => {
-                    particles.push({ x, y, vx, vy, life, maxLife: life, type, color });
-                };
-
-                const draw = () => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                    if (state.mode === 'idle') {
-                         ctx.fillStyle = 'rgba(226, 232, 240, 0.8)';
-                         ctx.font = '20px Inter';
-                         ctx.textAlign = 'center';
-                         ctx.fillText('Clique em um botão para começar uma simulação', canvas.width / 2, canvas.height / 2);
-                    }
-                    
-                    if (state.mode === 'supernova') {
-                        const centerX = canvas.width / 2;
-                        const centerY = canvas.height / 2;
-                        if (state.frame < 60) {
-                            const size = 10 + state.frame * 0.5;
-                            ctx.fillStyle = `hsl(${60 - state.frame}, 100%, 50%)`;
-                            ctx.beginPath();
-                            ctx.arc(centerX, centerY, size, 0, Math.PI * 2);
-                            ctx.fill();
-                        } else if (state.frame === 60) {
-                            for (let i = 0; i < 300; i++) {
-                                const angle = Math.random() * Math.PI * 2;
-                                const speed = Math.random() * 5 + 2;
-                                createParticle(centerX, centerY, Math.cos(angle) * speed, Math.sin(angle) * speed, 120);
-                            }
-                            state.supernovaRemnant = { x: centerX, y: centerY, radius: 8 };
-                        } else if (state.frame > 60 && state.supernovaRemnant) {
-                            ctx.fillStyle = 'white';
-                            ctx.beginPath();
-                            ctx.arc(state.supernovaRemnant.x, state.supernovaRemnant.y, state.supernovaRemnant.radius, 0, Math.PI * 2);
-                            ctx.shadowColor = '#38bdf8';
-                            ctx.shadowBlur = 20;
-                            ctx.fill();
-                            ctx.shadowBlur = 0;
-                            if (state.frame >= 250) {
-                                state.mode = 'post-supernova';
-                            }
-                        }
-                    } else if (state.mode === 'post-supernova') {
-                        if (state.supernovaRemnant) {
-                            ctx.fillStyle = 'white';
-                            ctx.beginPath();
-                            ctx.arc(state.supernovaRemnant.x, state.supernovaRemnant.y, state.supernovaRemnant.radius, 0, Math.PI * 2);
-                            ctx.shadowColor = '#38bdf8';
-                            ctx.shadowBlur = 20;
-                            ctx.fill();
-                            ctx.shadowBlur = 0;
-                        }
-                    }
-
-                    if (state.mode === 'sun_evolution') {
-                        const centerX = canvas.width / 2;
-                        const centerY = canvas.height / 2;
-
-                        if (sunEvolutionData.type === 'main_sequence') {
-                            if (state.frame > 50) {
-                                sunEvolutionData.radius += 0.2;
-                                if (sunEvolutionData.radius >= 120) sunEvolutionData.type = 'red_giant';
-                                
-                                const expansionProgress = Math.max(0, (sunEvolutionData.radius - 10) / (120 - 10));
-                                const hue = 50 - (50 * expansionProgress);
-                                ctx.fillStyle = `hsl(${hue}, 95%, 55%)`;
-
-                            } else {
-                                ctx.fillStyle = '#fde047';
-                            }
-                            ctx.beginPath();
-                            ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2);
-                            ctx.fill();
-
-                        } else if (sunEvolutionData.type === 'red_giant') {
-                            ctx.fillStyle = '#ef4444';
-                            ctx.beginPath();
-                            ctx.arc(centerX, centerY, sunEvolutionData.radius, 0, Math.PI * 2);
-                            ctx.fill();
-                            if (state.frame % 3 === 0 && particles.length < 800) {
-                                const angle = Math.random() * Math.PI * 2;
-                                const dist = sunEvolutionData.radius * (0.8 + Math.random() * 0.2);
-                                const speed = Math.random() * 0.8 + 0.3;
-                                createParticle(centerX + Math.cos(angle) * dist, centerY + Math.sin(angle) * dist, Math.cos(angle) * speed, Math.sin(angle) * speed, 300, 'gas', 'rgba(129, 140, 248, 0.8)');
-                            }
-                            if (state.frame > 250) {
-                                sunEvolutionData.radius -= 0.5;
-                                sunEvolutionData.alpha -= 0.008;
-                                if (sunEvolutionData.alpha <= 0.05 || sunEvolutionData.radius <= 5) sunEvolutionData.type = 'white_dwarf';
-                            }
-                        } else if (sunEvolutionData.type === 'white_dwarf') {
-                            ctx.fillStyle = '#60a5fa';
-                            ctx.beginPath();
-                            ctx.arc(centerX, centerY, 5, 0, Math.PI * 2);
-                            ctx.fill();
-                        }
-
-                        if (sunEvolutionData.type === 'white_dwarf' && particles.length === 0 && state.frame > 350) {
-                            state.mode = 'post-sun-evolution';
-                        }
-                    }
-
-                    if(state.mode === 'gravity') {
-                       const centerX = canvas.width / 2;
-                       const centerY = canvas.height / 2;
-                       const G = 0.5;
-                       
-                       if (!gravityStar) {
-                           gravityStar = { x: centerX, y: centerY, radius: 15, mass: 1000 };
-                       }
-                       ctx.fillStyle = '#fde047';
-                       ctx.beginPath();
-                       ctx.arc(gravityStar.x, gravityStar.y, gravityStar.radius, 0, Math.PI * 2);
-                       ctx.shadowColor = '#f59e0b';
-                       ctx.shadowBlur = 20;
-                       ctx.fill();
-                       ctx.shadowBlur = 0;
-
-                       particles.forEach(p => {
-                           const dx = gravityStar.x - p.x;
-                           const dy = gravityStar.y - p.y;
-                           const distSq = dx * dx + dy * dy;
-                           if(distSq > 1) {
-                               const forceMagnitude = G * gravityStar.mass / distSq; 
-                               p.vx += forceMagnitude * dx / Math.sqrt(distSq);
-                               p.vy += forceMagnitude * dy / Math.sqrt(distSq);
-                           }
-                       });
-                    }
-
-                    if (state.mode === 'bh_accretion') {
-                        const centerX = canvas.width / 2;
-                        const centerY = canvas.height / 2;
-
-                        if (!blackHole) {
-                            blackHole = { x: centerX, y: centerY, radius: 10, mass: 5000 };
-                        }
-
-                        ctx.fillStyle = '#1e293b';
-                        ctx.beginPath();
-                        ctx.arc(blackHole.x, blackHole.y, blackHole.radius, 0, Math.PI * 2);
-                        ctx.fill();
-
-                        if (state.frame % 2 === 0 && accretionParticles.length < 300) {
-                            const angle = Math.random() * Math.PI * 2;
-                            const dist = Math.random() * 100 + 50;
-                            accretionParticles.push({
-                                x: blackHole.x + Math.cos(angle) * dist,
-                                y: blackHole.y + Math.sin(angle) * dist,
-                                vx: (-Math.sin(angle) * 2),
-                                vy: (Math.cos(angle) * 2),
-                                life: 150,
-                                maxLife: 150
-                            });
-                        }
-
-                        let nextAccretionParticles = [];
-                        accretionParticles.forEach(p => {
-                            const dx = blackHole.x - p.x;
-                            const dy = blackHole.y - p.y;
-                            const distSq = dx * dx + dy * dy;
-                            const dist = Math.sqrt(distSq);
-
-                            if (dist > blackHole.radius) {
-                                const force = blackHole.mass / distSq * 0.005;
-                                p.vx += force * dx / dist;
-                                p.vy += force * dy / dist;
-
-                                const angularForce = 0.00001;
-                                p.vx += -dy * angularForce;
-                                p.vy += dx * angularForce;
-
-                                p.x += p.vx;
-                                p.y += p.vy;
-                            } else {
-                                p.life = 0;
-                            }
-
-                            p.life--;
-                            if (p.life > 0) {
-                                ctx.globalAlpha = p.life / p.maxLife;
-                                ctx.fillStyle = `hsl(${p.life * 2}, 100%, 70%)`;
-                                ctx.beginPath();
-                                ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-                                ctx.fill();
-                                ctx.globalAlpha = 1;
-                                nextAccretionParticles.push(p);
-                            }
-                        });
-                        accretionParticles = nextAccretionParticles;
-                    }
-                    
-                    let nextParticles = [];
-                    particles.forEach(p => {
-                        p.x += p.vx;
-                        p.y += p.vy;
-                        p.life--;
-                        if (p.life > 0) {
-                            ctx.globalAlpha = p.life / p.maxLife;
-                            ctx.fillStyle = p.color;
-                            ctx.beginPath();
-                            if (p.type === 'debris') {
-                               ctx.arc(p.x, p.y, 1, 0, Math.PI*2);
-                            } else {
-                               ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
-                            }
-                            ctx.fill();
-                            ctx.globalAlpha = 1;
-                            nextParticles.push(p);
-                        }
-                    });
-                    particles = nextParticles;
-
-                    state.frame++;
-                    requestAnimationFrame(draw);
-                };
-                
-                document.getElementById('sim-sun-evolution').onclick = () => { reset(); state.mode = 'sun_evolution'; state.frame = 0; sunEvolutionData = { radius: 10, alpha: 1, type: 'main_sequence' }; };
-                document.getElementById('sim-supernova').onclick = () => { reset(); state.mode = 'supernova'; state.frame = 0; state.supernovaRemnant = null; };
-                document.getElementById('sim-gravity').onclick = () => {
-                    reset();
-                    state.mode = 'gravity';
-                    gravityStar = null; 
-                    for(let i=0; i<100; i++) {
-                        createParticle(Math.random() * canvas.width, Math.random() * canvas.height, 0, 0, 300); 
-                    }
-                };
-                document.getElementById('sim-bh-accretion').onclick = () => { reset(); state.mode = 'bh_accretion'; state.frame = 0; blackHle = null; accretionParticles = []; };
-                document.getElementById('sim-reset').onclick = reset;
-
-                window.addEventListener('resize', resizeCanvas);
-                resizeCanvas();
-                draw();
-            };
-
             const toggleFullscreen = () => {
-                if (!document.fullscreenElement) {
-                    document.documentElement.requestFullscreen().catch(err => {
-                        console.log(`Erro ao tentar ativar o modo tela cheia: ${err.message} (${err.name})`);
-                    });
-                } else {
-                    document.exitFullscreen();
-                }
+                const btn = document.getElementById('fullscreen-btn');
+                if(!btn) return;
+                btn.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            alert(`Erro ao tentar ativar o modo tela cheia: ${err.message}`);
+                        });
+                    } else {
+                        document.exitFullscreen();
+                    }
+                });
             };
-
-            document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
 
             setupStarfield();
-            setupPropertiesChart();
-            setupSimulator();
+            toggleFullscreen();
         });
     </script>
 </body>
