@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buracos Negros Supermassivos: Os Motores das Galáxias</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .glass-effect { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.3); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <h1 class="text-xl md:text-2xl font-bold text-purple-400">Buracos Negros Supermassivos</h1>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#scale" class="text-slate-300 hover:text-purple-400 transition-colors">Escala</a>
+                    <a href="#sgr-a" class="text-slate-300 hover:text-purple-400 transition-colors">Sagitário A*</a>
+                    <a href="#feedback" class="text-slate-300 hover:text-purple-400 transition-colors">Regulação</a>
+                    <a href="#simulator" class="text-slate-300 hover:text-purple-400 transition-colors">Simulador</a>
+                    <a href="index.html" class="bg-sky-500 text-white px-4 py-2 rounded-md hover:bg-sky-600 transition-colors font-semibold">Voltar</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="intro" class="relative py-20 sm:py-32 text-center overflow-hidden">
+            <canvas id="starfield-canvas" class="absolute top-0 left-0 w-full h-full z-0"></canvas>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">Os Corações Gravitacionais das Galáxias</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">Com massas de milhões a bilhões de vezes a do nosso Sol, os buracos negros supermassivos são os objetos mais massivos do universo. Eles residem no centro da maioria das grandes galáxias, incluindo a nossa Via Láctea, e governam o seu destino.</p>
+            </div>
+        </section>
+
+        <section id="scale" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Ancorando o Cosmos</h2>
+                    <p class="mt-4 text-lg text-slate-400">A sua imensa gravidade dita a estrutura e a evolução das galáxias.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-slate-300 space-y-4 text-base">
+                        <p><strong class="font-semibold text-purple-400">Origem Misteriosa:</strong> Ao contrário de seus primos estelares, a formação dos buracos negros supermassivos ainda é um campo ativo de pesquisa. Eles podem ter se formado a partir do colapso direto de nuvens de gás primordiais no universo primitivo ou do crescimento contínuo de buracos negros menores.</p>
+                        <p><strong class="font-semibold text-purple-400">Centros Galácticos:</strong> A evidência esmagadora sugere que quase toda galáxia massiva hospeda um desses gigantes em seu núcleo. A massa do buraco negro está diretamente correlacionada com a massa do bojo central da galáxia, indicando uma coevolução.</p>
+                        <p><strong class="font-semibold text-purple-400">Quasares:</strong> Quando um buraco negro supermassivo está se alimentando ativamente de grandes quantidades de gás e estrelas, seu disco de acréscimo se torna incrivelmente quente e brilhante, ofuscando a luz de toda a galáxia. Este fenômeno é conhecido como um quasar, os faróis mais luminosos do universo distante.</p>
+                    </div>
+                    <div class="flex justify-center items-center p-8">
+                        <div class="relative w-72 h-72 flex items-center justify-center">
+                            <div class="absolute w-full h-full bg-purple-900/50 rounded-full animate-pulse blur-xl" style="animation-duration: 5s;"></div>
+                            <div class="absolute w-2/3 h-2/3 bg-purple-700/60 rounded-full animate-pulse blur-lg" style="animation-duration: 3s;"></div>
+                            <div class="w-1 h-1 bg-black rounded-full shadow-2xl shadow-black"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="sgr-a" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold">
+                        <a href="https://en.wikipedia.org/wiki/Sagittarius_A*" target="_blank" rel="noopener noreferrer" class="text-white hover:text-purple-400 hover:underline transition-colors">
+                            Estudo de Caso: Sagitário A*
+                        </a>
+                    </h2>
+                    <p class="mt-4 text-lg text-slate-400">O buraco negro supermassivo no coração da nossa própria Via Láctea.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-purple-400 font-bold text-xl">Massa</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~4.3 Milhões M☉</p>
+                        <p class="text-slate-400 mt-2">Massa de 4.3 milhões de Sóis</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-purple-400 font-bold text-xl">Diâmetro do Horizonte</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~25.5 Milhões km</p>
+                        <p class="text-slate-400 mt-2">Menor que a órbita de Mercúrio</p>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-purple-400 font-bold text-xl">Distância</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">~27,000 anos-luz</p>
+                        <p class="text-slate-400 mt-2">No centro da nossa galáxia</p>
+                    </div>
+                     <div class="glass-effect p-6 rounded-lg text-center">
+                        <h3 class="text-purple-400 font-bold text-xl">Prova da Existência</h3>
+                        <p class="text-3xl font-extrabold text-white mt-2">Órbita das Estrelas-S</p>
+                        <p class="text-slate-400 mt-2">Prêmio Nobel de Física de 2020</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="feedback" class="py-20 sm:py-24 bg-slate-950">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                 <h2 class="text-3xl font-bold text-white">O Termostato Galáctico</h2>
+                 <p class="mt-4 text-lg text-slate-400 max-w-2xl mx-auto">Buracos negros supermassivos não apenas consomem matéria, eles também a expelem. Os poderosos jatos de energia e radiação de um quasar podem aquecer e soprar para longe o gás frio de uma galáxia, interrompendo a formação de novas estrelas. Esse processo, chamado de <strong class="text-purple-400">"feedback" galáctico</strong>, é crucial para regular o crescimento e a evolução das galáxias ao longo do tempo cósmico.</p>
+            </div>
+        </section>
+        
+        <section id="simulator" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">Simulador do Coração Galáctico</h2>
+                    <p class="mt-4 text-lg text-slate-400">Explore o poder e a influência de um buraco negro supermassivo.</p>
+                </div>
+                <div class="w-full max-w-4xl mx-auto aspect-video glass-effect rounded-lg overflow-hidden">
+                    <canvas id="simulator-canvas"></canvas>
+                </div>
+                <div class="flex justify-center flex-wrap gap-4 mt-8">
+                    <button id="sim-s-stars" class="bg-purple-500 text-white px-5 py-2.5 rounded-md hover:bg-purple-600 transition-colors font-semibold">Dança das Estrelas-S</button>
+                    <button id="sim-quasar" class="bg-purple-500 text-white px-5 py-2.5 rounded-md hover:bg-purple-600 transition-colors font-semibold">Ativar Quasar</button>
+                    <button id="sim-feedback" class="bg-purple-500 text-white px-5 py-2.5 rounded-md hover:bg-purple-600 transition-colors font-semibold">Feedback Galáctico</button>
+                    <button id="sim-reset" class="bg-slate-600 text-white px-5 py-2.5 rounded-md hover:bg-slate-700 transition-colors font-semibold">Resetar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const setupStarfield = () => { /* ...código do starfield... */ };
+            
+            const setupSimulator = () => {
+                const canvas = document.getElementById('simulator-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let state = { mode: 'idle', frame: 0 };
+                let stars, particles, jets;
+
+                const resizeCanvas = () => { if(canvas) { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; }};
+                
+                const reset = (mode = 'idle') => {
+                    state.mode = mode;
+                    state.frame = 0;
+                    particles = [];
+                    stars = [];
+                    jets = [];
+
+                    if (mode === 's_stars') {
+                        // Pre-defined elliptical orbits for S-stars
+                        stars.push({ a: 150, b: 140, speed: 0.015, offset: 0, color: '#fef08a' });
+                        stars.push({ a: 120, b: 80, speed: 0.02, offset: 1, color: '#e0f2fe' });
+                        stars.push({ a: 180, b: 60, speed: 0.01, offset: 2.5, color: '#fecaca' });
+                        stars.forEach(s => s.path = []);
+                    } else if (mode === 'feedback') {
+                        for(let i=0; i<300; i++) {
+                            const angle = Math.random() * 2 * Math.PI;
+                            const radius = Math.random() * (canvas.width/2);
+                            particles.push({x: Math.cos(angle)*radius, y: Math.sin(angle)*radius, vx:0, vy:0, color: `hsl(${200 + Math.random()*60}, 70%, 50%)`});
+                        }
+                    }
+                };
+
+                const draw = () => {
+                    if(!canvas) return;
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    ctx.clearRect(0,0,canvas.width, canvas.height);
+
+                    if (state.mode === 's_stars') {
+                        // Draw paths
+                        stars.forEach(s => {
+                            ctx.beginPath();
+                            s.path.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+                            ctx.strokeStyle = `rgba(255,255,255,0.2)`;
+                            ctx.stroke();
+                        });
+
+                        // Draw and update stars
+                        stars.forEach(s => {
+                            const angle = state.frame * s.speed + s.offset;
+                            const x = centerX + s.a * Math.cos(angle);
+                            const y = centerY + s.b * Math.sin(angle);
+                            if(state.frame % 3 === 0) s.path.push({x,y});
+                            if(s.path.length > 200) s.path.shift();
+
+                            ctx.fillStyle = s.color;
+                            ctx.beginPath(); ctx.arc(x, y, 4, 0, 2 * Math.PI); ctx.fill();
+                        });
+                        
+                        // Central black hole
+                        ctx.fillStyle = 'black'; ctx.beginPath(); ctx.arc(centerX, centerY, 5, 0, 2*Math.PI); ctx.fill();
+
+                    } else if (state.mode === 'quasar') {
+                        if(particles.length < 400 && state.frame % 2 === 0){
+                           particles.push({angle: Math.random()*2*Math.PI, radius: Math.random()*100 + 180, speed: 0.005 + Math.random()*0.01, life: 300});
+                        }
+                        particles.forEach((p, i) => {
+                           p.angle += p.speed; p.radius -= 0.5; p.life--;
+                           if(p.radius < 20 || p.life <= 0) particles.splice(i, 1);
+                           const x = centerX + p.radius * Math.cos(p.angle);
+                           const y = centerY + p.radius * Math.sin(p.angle) * 0.4;
+                           ctx.fillStyle = `hsl(50, 100%, ${100 - p.radius/3}%)`;
+                           ctx.beginPath(); ctx.arc(x, y, 2, 0, 2*Math.PI); ctx.fill();
+                        });
+                        
+                        if(state.frame % 3 === 0){
+                           for(let i=0; i<2; i++) jets.push({x: centerX, y: centerY, vx: (Math.random()-0.5)*1, vy: -(Math.random()*10+10) * (i===0?1:-1), life: 80});
+                        }
+                        jets.forEach((p,i)=>{
+                            p.x += p.vx; p.y += p.vy; p.life--;
+                            if(p.life <=0) jets.splice(i, 1);
+                            ctx.fillStyle = `rgba(192, 132, 252, ${p.life/80})`;
+                            ctx.beginPath(); ctx.arc(p.x, p.y, 4, 0, 2*Math.PI); ctx.fill();
+                        });
+
+                        ctx.fillStyle = 'black'; ctx.beginPath(); ctx.arc(centerX, centerY, 20, 0, 2*Math.PI); ctx.fill();
+
+                    } else if (state.mode === 'feedback') {
+                        if (state.frame < 300) { // Jet phase
+                             if(state.frame % 2 === 0){
+                                for(let i=0; i<2; i++) jets.push({x: centerX, y: centerY, vx: 0, vy: -(Math.random()*15+15) * (i===0?1:-1), life: 50});
+                             }
+                        }
+                        jets.forEach((p,i)=>{
+                            p.x += p.vx; p.y += p.vy; p.life--;
+                            if(p.life <=0) jets.splice(i, 1);
+                            ctx.fillStyle = `rgba(255, 255, 255, ${p.life/50})`;
+                            ctx.beginPath(); ctx.arc(p.x, p.y, 5, 0, 2*Math.PI); ctx.fill();
+                        });
+
+                        particles.forEach(p => {
+                            const dx = (centerX+p.x) - centerX;
+                            const dy = (centerY+p.y) - (centerY-150); // From top jet
+                            const distSq = dx*dx + dy*dy;
+                            if (distSq < 10000 && state.frame < 300) {
+                                p.vx += 10 * dx / distSq;
+                                p.vy += 10 * dy / distSq;
+                            }
+                            p.x += p.vx; p.y += p.vy; p.vx *= 0.98; p.vy *= 0.98;
+
+                            ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(centerX + p.x, centerY + p.y, 2, 0, 2*Math.PI); ctx.fill();
+                        });
+                        
+                        ctx.fillStyle = 'black'; ctx.beginPath(); ctx.arc(centerX, centerY, 10, 0, 2*Math.PI); ctx.fill();
+                    }
+                    else {
+                        ctx.fillStyle = 'rgba(226, 232, 240, 0.8)'; ctx.font = '20px Inter'; ctx.textAlign = 'center';
+                        ctx.fillText('Selecione uma simulação acima.', centerX, centerY);
+                    }
+                    state.frame++;
+                    requestAnimationFrame(draw);
+                };
+                
+                document.getElementById('sim-s-stars').onclick = () => reset('s_stars');
+                document.getElementById('sim-quasar').onclick = () => reset('quasar');
+                document.getElementById('sim-feedback').onclick = () => reset('feedback');
+                document.getElementById('sim-reset').onclick = () => reset('idle');
+                
+                window.addEventListener('load', () => { resizeCanvas(); reset('idle'); draw(); });
+                window.addEventListener('resize', resizeCanvas);
+            };
+
+            setupStarfield();
+            setupSimulator();
+        });
+    </script>
+</body>
+</html>
